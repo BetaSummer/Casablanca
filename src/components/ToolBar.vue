@@ -2,7 +2,7 @@
   <div class="toolbar" :style="bgPosition">
     <div class="toolbar-headline">
       <h1>
-        第{{ generation }}届
+        第{{ generation || 1 }}届
       </h1>
     </div>
     <div class="toolbar-actions">
