@@ -1,8 +1,10 @@
 <template>
-  <li class="sidebar-item">
-    <i class="iconfont icon-people"></i>
-    <span class="term">第 {{ term }} 届</span>
-  </li>
+  <router-link :to="`/members/${term}`">
+    <li class="sidebar-item">
+      <i class="iconfont icon-people"></i>
+      <span class="term">第 {{ term }} 届</span>
+    </li>
+  </router-link>
 </template>
 
 <script>
@@ -28,4 +30,9 @@ export default {
   
 .sidebar-item.active
   background #ededed
+
+a
+  outline none
+  text-decoration none
+  color black
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="member-view">
-    <tool-bar></tool-bar>
-    <member-list></member-list>
+    <tool-bar :generation="$route.params.generation"></tool-bar>
+    <member-list :generation="$route.params.generation"></member-list>
   </div>
 </template>
 

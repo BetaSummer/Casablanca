@@ -1,8 +1,8 @@
 <template>
-  <div class="toolbar">
+  <div class="toolbar" :style="bgPosition">
     <div class="toolbar-headline">
       <h1>
-        第一届
+        第{{ generation }}届
       </h1>
     </div>
     <div class="toolbar-actions">
@@ -14,7 +14,16 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      bgPosition: {
+        backgroundPosition: `0 ${this.generation * (-150)}px`,
+      },
+    };
+  },
+  props: ['generation'],
+};
 </script>
 
 <style lang="stylus">
