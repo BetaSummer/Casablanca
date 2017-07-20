@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar" :style="bgPosition">
+  <div class="toolbar" :style="toolbarStyle">
     <div class="toolbar-headline">
       <h1>
         第{{ generation || 1 }}届
@@ -15,14 +15,21 @@
 
 <script>
 export default {
+  props: ['generation'],
   data() {
     return {
-      bgPosition: {
+      toolbarStyle: {
         backgroundPosition: `0 ${this.generation * (-150)}px`,
       },
     };
   },
-  props: ['generation'],
+  watch: {
+    $route() {
+      this.toolbarStyle = {
+        backgroundPosition: `0 ${this.generation * (-150)}px`,
+      };
+    },
+  },
 };
 </script>
 
@@ -35,7 +42,6 @@ export default {
   align-items flex-end
   border-left 1px solid rgba(0,0,0,.1)
   background url('../assets/toolbar-bg.jpg') no-repeat
-  // 根据不同届更改 position
   background-position 0 0
   .toolbar-headline
     align-self flex-end
