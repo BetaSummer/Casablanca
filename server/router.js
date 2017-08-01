@@ -1,4 +1,6 @@
 const router = require('koa-router')();
-const member = require('./controller/member');
+const memberController = require('./controller/member');
 
-router.get('/api/members', member.index);
+router.get('/api/members', memberController.index);
+
+module.exports = router;

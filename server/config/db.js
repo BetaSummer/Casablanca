@@ -1,8 +1,8 @@
 const mysql = require('./config.dev.js').mysql;
-const Sq = require('sequelize');
+const Sequelize = require('sequelize');
 
-const sequelize = new Sq(mysql.uri);
-sequelize
+const db = new Sequelize(mysql.uri);
+db
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
@@ -10,4 +10,5 @@ sequelize
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
-module.exports = sequelize;
+
+module.exports = db;
