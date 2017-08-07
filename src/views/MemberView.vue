@@ -15,6 +15,16 @@ export default {
     ToolBar,
     MemberList,
   },
+  watch: {
+    $route: 'fetchMembers',
+  },
+  methods: {
+    fetchMembers() {
+      this.$store.dispatch('FETCH_MEMBERS', {
+        generation: this.$route.params.generation,
+      });
+    },
+  },
 };
 </script>
 
