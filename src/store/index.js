@@ -6,16 +6,11 @@ import getters from './getters';
 
 Vue.use(Vuex);
 
-export default function createStore() {
-  return new Vuex.Store({
-    state: {
-      activeGeneration: {
-        members: [],
-      },
-      generations: [],
-    },
-    mutations,
-    getters,
-    actions,
-  });
-}
+export default new Vuex.Store({
+  state: {
+    members: [],
+  },
+  mutations,
+  getters,
+  actions,
+});
