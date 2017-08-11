@@ -20,9 +20,17 @@ export default {
   },
   methods: {
     fetchMembers() {
-      this.$store.dispatch('FETCH_MEMBERS', {
-        generation: this.$route.params.generation,
-      });
+      const generation = this.$route.params.generation;
+      if (!this.members[generation]) {
+        this.$store.dispatch('FETCH_MEMBERS', {
+          generation: this.$route.params.generation,
+        });
+      }
+    },
+  },
+  computed: {
+    members() {
+      return this.$store.state.members;
     },
   },
 };
