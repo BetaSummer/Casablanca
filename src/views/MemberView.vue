@@ -1,7 +1,10 @@
 <template>
   <div class="member-view">
     <tool-bar :generation="$route.params.generation"></tool-bar>
-    <member-list :generation="$route.params.generation"></member-list>
+    <member-list
+      :generation="$route.params.generation"
+      :members="members">
+    </member-list>
   </div>
 </template>
 
@@ -9,6 +12,8 @@
 import { mapGetters } from 'vuex';
 import ToolBar from '../components/ToolBar';
 import MemberList from '../components/MemberList';
+
+let generation;
 
 export default {
   name: 'MemberView',
@@ -21,17 +26,17 @@ export default {
   },
   methods: {
     fetchMembers() {
-      const generation = this.$route.params.generation;
+      generation = this.$route.params.generation;
       if (!this.allMembers[generation]) {
-        this.$store.dispatch('FETCH_MEMBERS', {
-          generation: this.$route.params.generation,
+        this.$store.dispatch('fetchMembers', {
+          generation,
         });
       }
     },
   },
   computed: {
     members() {
-      return this.$store.getters.activeMembers(this.$route.params.generation);
+      return this.allMembers[this.$route.params.generation];
     },
     ...mapGetters([
       'allMembers',
