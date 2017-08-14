@@ -1,6 +1,10 @@
 <template>
   <div class="member-list">
-    <member-card v-for="item in [1,2,3,4,5,6,7,8,9,10]" :key="item"></member-card>
+    <member-card
+      v-for="member in members.data"
+      :key="member.id"
+      :member="member">
+    </member-card>
   </div>
 </template>
 
@@ -8,6 +12,9 @@
 import MemberCard from './MemberCard';
 
 export default {
+  props: [
+    'members',
+  ],
   components: {
     MemberCard,
   },
