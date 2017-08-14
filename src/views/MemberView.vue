@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ToolBar from '../components/ToolBar';
 import MemberList from '../components/MemberList';
 
@@ -21,7 +22,7 @@ export default {
   methods: {
     fetchMembers() {
       const generation = this.$route.params.generation;
-      if (!this.members[generation]) {
+      if (!this.allMembers[generation]) {
         this.$store.dispatch('FETCH_MEMBERS', {
           generation: this.$route.params.generation,
         });
@@ -30,8 +31,14 @@ export default {
   },
   computed: {
     members() {
-      return this.$store.state.members;
+      return this.$store.getters.activeMembers(this.$route.params.generation);
     },
+    ...mapGetters([
+      'allMembers',
+    ]),
+  },
+  created() {
+    this.fetchMembers();
   },
 };
 </script>
