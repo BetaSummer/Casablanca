@@ -5,7 +5,4 @@ const api = axios.create({
   timeout: 1000,
 });
 
-export async function fetchMembersByGeneration(generation) {
-  const { data } = await api.get(`/members?generation=${generation}`);
-  return data;
-}
+export default api;
