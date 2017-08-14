@@ -5,17 +5,17 @@
     </div>
     <div class="member-info">
       <span class="name">
-        batman
+        {{ member.name }}
       </span>
       <span class="identity">
-        I am batman
+        {{ member.major }}
       </span>
     </div>
     <div class="social-media">
-      <a href="">
+      <a :href="member.github" v-show="member.github">
         <i class="iconfont icon-pinnedoctocat"></i>
       </a>
-      <a href="">
+      <a :href="member.blog">
         <i class="iconfont icon-blog"></i>
       </a>
     </div>
@@ -23,7 +23,11 @@
 </template>
 
 <script>
-
+export default {
+  props: [
+    'member',
+  ],
+};
 </script>
 
 <style lang="stylus" scoped>
