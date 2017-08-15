@@ -43,11 +43,11 @@ export default {
     };
   },
 
-  ADD_GENERATION(state) {
+  ADD_GENERATION({ generations }, generation) {
     const newGeneration = {
-      generation: state.generations.length + 1,
+      generation,
     };
-    state.generations.push(newGeneration);
+    generations.data.push(newGeneration);
   },
   SET_LOADING(state, { generation }) {
     state.members[generation].loading = true;
