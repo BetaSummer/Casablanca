@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <side-bar :terms="terms"></side-bar>
+    <side-bar :generations="generations.data"></side-bar>
     <div class="main">
       <router-view></router-view>
     </div>
@@ -8,19 +8,26 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import SideBar from './components/SideBar';
 
 export default {
   name: 'app',
-  data() {
-    return {
-      terms: [
-        1, 2, 3, 4, 5, 6,
-      ],
-    };
+  computed: {
+    ...mapState({
+      generations: 'generations',
+    }),
   },
   components: {
     SideBar,
+  },
+  methods: {
+    ...mapActions([
+      'fetchGenerationCount',
+    ]),
+  },
+  created() {
+    this.fetchGenerationCount();
   },
 };
 </script>

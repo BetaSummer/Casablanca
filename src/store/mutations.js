@@ -23,9 +23,26 @@ export default {
     };
     state.members = { ...state.members, [generation]: newMembers };
   },
-  SET_ACTIVE_GENERATION(state, { generation }) {
-    state.activeGeneration = generation;
+
+  SET_GENERATIONS(state) {
+    state.generations = {
+      data: [],
+      error: null,
+    };
   },
+  SET_GENERATIONS_SUCCESS(state, generations) {
+    state.generations = {
+      data: generations,
+      error: null,
+    };
+  },
+  SET_GENERATIONS_FAILURE(state, error) {
+    state.generations = {
+      data: [],
+      error,
+    };
+  },
+
   ADD_GENERATION(state) {
     const newGeneration = {
       generation: state.generations.length + 1,

@@ -1,15 +1,15 @@
 <template>
-  <router-link :to="`/members/${term}`" exact>
+  <router-link :to="`/members/${item.generation}`" exact>
     <li class="sidebar-item">
       <i class="iconfont icon-people"></i>
-      <span class="term">第 {{ term }} 届</span>
+      <span class="term">第 {{ item.generation }} 届</span>
     </li>
   </router-link>
 </template>
 
 <script>
 export default {
-  props: ['term'],
+  props: ['item'],
 };
 </script>
 
