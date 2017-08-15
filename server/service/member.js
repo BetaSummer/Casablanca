@@ -1,4 +1,5 @@
 const Member = require('../model/member');
+const db = require('../config/db');
 
 class MemberService {
   async findAll() {
@@ -12,6 +13,12 @@ class MemberService {
       },
     });
     return members;
+  }
+  async getGenerations() {
+    const generations = await db.query('select distinct generation from members order by generation', {
+      type: db.QueryTypes.SELECT,
+    });
+    return generations;
   }
 }
 

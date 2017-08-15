@@ -8,7 +8,11 @@
     </header>
     <div class="sidebar-content">
       <ul class="term-lists">
-        <side-bar-item v-for="(term, index) in terms" :key="index" :term="term"></side-bar-item>
+        <side-bar-item
+          v-for="(item, index) in generations"
+          :key="index"
+          :item="item">
+        </side-bar-item>
       </ul>
       <div class="addlist sidebar-item">
         <span>
@@ -26,7 +30,7 @@
 import SideBarItem from './SideBarItem';
 
 export default {
-  props: ['terms'],
+  props: ['generations'],
   components: {
     SideBarItem,
   },
