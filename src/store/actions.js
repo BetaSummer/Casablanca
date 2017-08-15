@@ -19,4 +19,7 @@ export default {
       commit('SET_GENERATIONS_FAILURE', e);
     }
   },
+  addGeneration({ commit }, generation) {
+    commit('ADD_GENERATION', generation);
+  },
 };

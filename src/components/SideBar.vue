@@ -14,7 +14,7 @@
           :item="item">
         </side-bar-item>
       </ul>
-      <div class="addlist sidebar-item">
+      <div class="addlist sidebar-item" @click="addGeneration">
         <span>
           <i class="iconfont icon-add"></i>
         </span>
@@ -33,6 +33,13 @@ export default {
   props: ['generations'],
   components: {
     SideBarItem,
+  },
+  methods: {
+    addGeneration() {
+      const newGeneration = this.generations.length + 1;
+      this.$store.dispatch('addGeneration', newGeneration);
+      this.$router.push({ path: `/members/${newGeneration}` });
+    },
   },
 };
 </script>
