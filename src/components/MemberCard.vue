@@ -1,7 +1,7 @@
 <template>
   <div class="member-card">
     <div class="avatar">
-      <img src="../assets/avatar.png">
+      <img src="../assets/avatar.png" @click="showModal = true">
     </div>
     <div class="member-info">
       <span class="name">
@@ -19,14 +19,25 @@
         <i class="iconfont icon-blog"></i>
       </a>
     </div>
+    <member-detail v-if="showModal" @close="showModal = false"></member-detail>
   </div>
 </template>
 
 <script>
+import MemberDetail from './MemberDetail';
+
 export default {
   props: [
     'member',
   ],
+  data() {
+    return {
+      showModal: false,
+    };
+  },
+  components: {
+    MemberDetail,
+  },
 };
 </script>
 
