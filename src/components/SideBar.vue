@@ -50,7 +50,7 @@ $sidebar-fontsize = 1.1rem
 .sidebar
   display flex
   flex-direction column
-  width 270px
+  min-width 270px
   height 100vh
   .sidebar-header
     display flex
