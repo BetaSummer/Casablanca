@@ -19,7 +19,11 @@
         <i class="iconfont icon-blog"></i>
       </a>
     </div>
-    <member-detail v-if="showModal" @close="showModal = false"></member-detail>
+    <member-detail
+      v-if="showModal"
+      :member="member"
+      @close="showModal = false">
+    </member-detail>
   </div>
 </template>
 
@@ -56,20 +60,19 @@ export default {
     display flex
     flex-direction column
     align-items center
+    span.name
+      font-weight bold
+      font-size 1.3rem
+    span.identity
+      color #828282
+      font-size 0.9rem
 
 .avatar
   img
     width 100px
     height 100px
     border-radius 50%
-
-span.name
-  font-weight bold
-  font-size 1.3rem
-
-span.identity
-  color #828282
-  font-size 0.9rem
+    cursor pointer
 
 .social-media
   a

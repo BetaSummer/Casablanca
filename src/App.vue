@@ -40,7 +40,7 @@ body
 
 
 body
-  font-family "Helvetica Neue", Helvetica, STHeiTi, sans-serif
+  font-family 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif
   margin 0
 
 #app

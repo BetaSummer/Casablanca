@@ -1,28 +1,33 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <div class="modal-wrapper">
+      <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
+          <i class="iconfont icon-edit-copy"></i>
+          <div class="left">
+            <h1>
+              {{ member.name}}
+            </h1>
+            <div class="social-media">
+              <a :href="member.github" v-show="member.github">
+                <i class="iconfont icon-pinnedoctocat"></i>
+              </a>
+              <a :href="member.blog">
+                <i class="iconfont icon-blog"></i>
+              </a>
+            </div>
           </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
+          <div class="middle">
+            <img src="../assets/avatar.png" alt="avatar">
           </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
+          <div class="right">
+            <div class="member-identity">
+              <span class="major">{{ member.major }}</span>
+              <span class="generation">第 {{ member.generation }} 届成员</span>
+            </div>
+            <p class="member-info">
+              {{ member.info}}
+            </p>
           </div>
         </div>
       </div>
@@ -55,25 +60,53 @@ export default {
   vertical-align middle
 
 .modal-container
-  width 300px
+  display flex
+  position relative
+  width 70rem
   margin 0px auto
-  padding 20px 30px
   background-color #fff
   border-radius 2px
   box-shadow 0 2px 8px rgba(0, 0, 0, .33)
   transition all .3s ease
-  font-family Helvetica, Arial, sans-serif
-
-.modal-header
-  h3
-    margin-top 0
-    color #42b983
-
-.modal-body
-  margin 20px 0
-
-.modal-default-button
-  float right
+  > div
+    flex 1 0 1
+  > i
+    position absolute
+    top 20px
+    right 20px
+  .left
+    display flex
+    flex-direction column
+    align-items center
+    justify-content space-between
+    min-width 15%
+    h1
+      align-self stretch 
+      font-weight 300
+      color #2c3e50
+      writing-mode vertical-rl
+      margin-right 1.5rem
+      margin-top 6rem
+    .social-media
+      color black
+      margin-bottom 40px
+  .middle
+    img
+      width 100%
+  .right
+    display flex
+    flex-direction column
+    align-items center
+    width 30%
+    padding 70px 30px 0 30px
+    .member-identity
+      color gray
+      .generation
+        margin-left 20px
+    .member-info
+      margin-top 50px
+      word-wrap: break-word
+      line-height 2rem
 
 .modal-enter
   opacity 0
