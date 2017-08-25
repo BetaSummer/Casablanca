@@ -22,4 +22,12 @@ export default {
   addGeneration({ commit }, generation) {
     commit('ADD_GENERATION', generation);
   },
+  async updateMember({ commit }, memberInfo) {
+    try {
+      await api.put('/member', memberInfo);
+      commit('UPDATE_MEMBER_SUCCESS', memberInfo);
+    } catch (e) {
+      commit('UPDATE_MEMBER_FAILURE', e);
+    }
+  },
 };

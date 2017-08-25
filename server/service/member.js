@@ -20,6 +20,14 @@ class MemberService {
     });
     return generations;
   }
+  async updateMember(memberInfo) {
+    const { id } = memberInfo;
+    Member.update(memberInfo, {
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 module.exports = new MemberService();

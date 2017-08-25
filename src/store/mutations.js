@@ -24,6 +24,19 @@ export default {
     state.members = { ...state.members, [generation]: newMembers };
   },
 
+  UPDATE_MEMBER_SUCCESS({ members }, member) {
+    members = {
+      ...members,
+      [member.generation]: {
+        ...members[member.generation],
+        member,
+      },
+    };
+  },
+  // UPDATE_MEMBER_FAILURE({ members }, e) {
+  //
+  // },
+
   SET_GENERATIONS(state) {
     state.generations = {
       data: [],

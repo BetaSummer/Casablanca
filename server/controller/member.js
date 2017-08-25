@@ -12,6 +12,11 @@ class MemberController {
     const generations = await memberService.getGenerations();
     ctx.body = generations;
   }
+  async updateMember(ctx) {
+    const member = ctx.request.body;
+    await memberService.updateMember(member);
+    ctx.status = 200;
+  }
 }
 
 module.exports = new MemberController();

@@ -90,7 +90,8 @@ export default {
   },
   methods: {
     saveForm() {
-      // TODO ...
+      // TODO：validity
+      this.$store.dispatch('updateMember', this.form);
       this.isEditing = false;
     },
   },
