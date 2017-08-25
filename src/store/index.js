@@ -8,7 +8,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    members: {},
+    members: {
+      data: [],
+      loading: false,
+      error: null,
+    },
+    fetchedGenerations: [],
     generations: {},
   },
   mutations,

@@ -1,27 +1,28 @@
 export default {
-  SET_MEMBERS(state, { generation }) {
+  SET_MEMBERS(state) {
     const newMembers = {
-      data: [],
+      data: state.members.data,
       loading: true,
       error: null,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
   },
   SET_MEMBERS_SUCCESS(state, { generation, data }) {
     const newMembers = {
-      data,
+      data: data.concat([1, 2, 3, 4, 5]),
       loading: false,
       error: null,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
+    state.fetchedGenerations.push(generation);
   },
-  SET_MEMBERS_FAILURE(state, { generation, error }) {
+  SET_MEMBERS_FAILURE(state, error) {
     const newMembers = {
-      data: [],
+      data: state.members.data,
       loading: false,
       error,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
   },
 
   UPDATE_MEMBER_SUCCESS({ members }, member) {

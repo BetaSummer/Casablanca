@@ -1,8 +1,5 @@
 export default {
-  allMembers(state) {
-    return state.members;
-  },
-  activeMembers(state) {
-    return generation => state.members[generation];
+  activeMembers({ members }) {
+    return generation => members.data.filter(member => member.generation === generation);
   },
 };

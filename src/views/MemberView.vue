@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import ToolBar from '../components/ToolBar';
 import MemberList from '../components/MemberList';
 
@@ -27,7 +27,7 @@ export default {
   methods: {
     fetchMembers() {
       generation = this.$route.params.generation;
-      if (!this.allMembers[generation]) {
+      if (!this.fetchedGenerations.includes(generation)) {
         this.$store.dispatch('fetchMembers', {
           generation,
         });
@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     members() {
-      return this.allMembers[this.$route.params.generation];
+      return this.$store.getters.activeMembers(Number(generation));
     },
-    ...mapGetters([
-      'allMembers',
+    ...mapState([
+      'fetchedGenerations',
     ]),
   },
   created() {
