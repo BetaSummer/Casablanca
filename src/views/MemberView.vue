@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     members() {
-      return this.$store.getters.activeMembers(Number(generation));
+      return this.$store.getters.activeMembers(Number(this.$route.params.generation));
     },
     ...mapState([
       'fetchedGenerations',

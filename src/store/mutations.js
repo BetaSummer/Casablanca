@@ -9,7 +9,7 @@ export default {
   },
   SET_MEMBERS_SUCCESS(state, { generation, data }) {
     const newMembers = {
-      data: data.concat([1, 2, 3, 4, 5]),
+      data: data.concat(state.members.data),
       loading: false,
       error: null,
     };
