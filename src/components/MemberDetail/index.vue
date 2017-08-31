@@ -20,7 +20,12 @@
             <Left v-else key="editing">
               <label slot="name">
                 姓名
-                <input class="name" type="text" v-model="form.name" :size="form.name.length">  
+                <input
+                  class="name"
+                  type="text"
+                  v-model="form.name"
+                  :size="form.name.length || 1"
+                  :maxlength="4">  
               </label>
               <a slot="github" :href="member.github" v-show="member.github">
                 <i class="iconfont icon-pinnedoctocat"></i>
@@ -46,7 +51,7 @@
             <Right v-else key="editing">
               <label slot="major">
                 专业
-                <input class="major" type="text" v-model="form.major" :size="form.major.length">  
+                <input class="major" type="text" v-model="form.major" maxlength="7">  
               </label>
               <label slot="generation">
                 第
@@ -85,7 +90,15 @@ export default {
   data() {
     return {
       isEditing: false,
-      form: this.member,
+      form: {
+        id: this.member.id,
+        name: this.member.name,
+        major: this.member.major,
+        generation: this.member.generation,
+        info: this.member.info,
+        github: this.member.github,
+        blog: this.member.blog,
+      },
     };
   },
   methods: {

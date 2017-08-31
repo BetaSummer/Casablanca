@@ -26,7 +26,7 @@ export default {
   flex-direction column
   align-items center
   justify-content space-between
-  width 30%
+  min-width 25%
   padding 50px 30px 0 30px
   .member-identity
     color gray

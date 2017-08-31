@@ -23,11 +23,22 @@ export default {
     commit('ADD_GENERATION', generation);
   },
   async updateMember({ commit }, memberInfo) {
-    try {
-      await api.put('/member', memberInfo);
-      commit('UPDATE_MEMBER_SUCCESS', memberInfo);
-    } catch (e) {
-      commit('UPDATE_MEMBER_FAILURE', e);
+    const { name, generation, major } = memberInfo;
+    if (name.length === 0) {
+      commit('POP_ERROR_MSG', '姓名不能为空');
+    } else if (!Number(generation)) {
+      commit('POP_ERROR_MSG', '届数不合法');
+    } else if (generation.length === 0) {
+      commit('POP_ERROR_MSG', '届数不能为空');
+    } else if (major.length === 0) {
+      commit('', '专业不能为空');
+    } else {
+      try {
+        await api.put('/member', memberInfo);
+        commit('UPDATE_MEMBER_SUCCESS', memberInfo);
+      } catch (e) {
+        commit('UPDATE_MEMBER_FAILURE', e);
+      }
     }
   },
 };

@@ -14,7 +14,14 @@ export default new Vuex.Store({
       error: null,
     },
     fetchedGenerations: [],
-    generations: {},
+    generations: {
+      data: [],
+      error: null,
+    },
+    message: {
+      content: null,
+      type: '',
+    },
   },
   mutations,
   getters,

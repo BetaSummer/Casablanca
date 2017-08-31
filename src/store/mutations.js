@@ -66,4 +66,11 @@ export default {
   SET_LOADING(state, { generation }) {
     state.members[generation].loading = true;
   },
+
+  POP_ERROR_MSG(state, message) {
+    state.message = {
+      content: message,
+      type: 'error',
+    };
+  },
 };
