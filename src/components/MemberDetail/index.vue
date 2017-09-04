@@ -90,16 +90,12 @@ export default {
   data() {
     return {
       isEditing: false,
-      form: {
-        id: this.member.id,
-        name: this.member.name,
-        major: this.member.major,
-        group: this.member.group,
-        info: this.member.info,
-        github: this.member.github,
-        blog: this.member.blog,
-      },
     };
+  },
+  computed: {
+    form() {
+      return this.member;
+    },
   },
   methods: {
     saveForm() {

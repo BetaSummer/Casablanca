@@ -26,13 +26,13 @@ export default {
   },
 
   UPDATE_MEMBER_SUCCESS({ members }, member) {
-    members = {
-      ...members,
-      [member.group]: {
-        ...members[member.group],
-        member,
-      },
-    };
+    const memberList = members.data;
+    for (let i = 0; i < memberList.length; i += 1) {
+      if (memberList[i].id === member.id) {
+        memberList[i] = member;
+        break;
+      }
+    }
   },
   // UPDATE_MEMBER_FAILURE({ members }, e) {
   //

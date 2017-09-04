@@ -7,7 +7,7 @@ export default {
       const { data } = await api.get(`/members?group=${group}`);
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
-      commit('SET_MEMBERS_FAILUR', e);
+      commit('SET_MEMBERS_FAILURE', e);
     }
   },
   async fetchGroupCount({ commit }) {
