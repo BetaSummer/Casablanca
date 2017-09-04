@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="`/members/${item.generation}`" exact>
+  <router-link :to="`/members/${item.group}`" exact>
     <li class="sidebar-item">
       <i class="iconfont icon-people"></i>
-      <span class="term">第 {{ item.generation }} 届</span>
+      <span class="term">第 {{ item.group }} 届</span>
     </li>
   </router-link>
 </template>

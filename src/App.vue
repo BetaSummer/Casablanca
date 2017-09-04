@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <side-bar :generations="generations.data"></side-bar>
+    <side-bar :groups="groups.data"></side-bar>
     <div class="main">
       <router-view></router-view>
     </div>
@@ -15,7 +15,7 @@ export default {
   name: 'app',
   computed: {
     ...mapState({
-      generations: 'generations',
+      groups: 'groups',
     }),
   },
   components: {
@@ -23,11 +23,11 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchGenerationCount',
+      'fetchGroupCount',
     ]),
   },
   created() {
-    this.fetchGenerationCount();
+    this.fetchGroupCount();
   },
 };
 </script>

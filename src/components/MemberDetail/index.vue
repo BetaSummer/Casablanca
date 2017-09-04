@@ -41,8 +41,8 @@
           <transition name="fade" mode="out-in">
             <Right v-if="!isEditing" key="view">
               <span slot="major" class="major">{{ member.major }}</span>
-              <span slot="generation" class="generation">
-                第 {{ member.generation }} 届成员
+              <span slot="group" class="group">
+                第 {{ member.group }} 届成员
               </span>
               <p slot="info" class="member-info">
                 {{ member.info}}
@@ -53,9 +53,9 @@
                 专业
                 <input class="major" type="text" v-model="form.major" maxlength="7">  
               </label>
-              <label slot="generation">
+              <label slot="group">
                 第
-                <input class="generation" type="text" v-model="form.generation">
+                <input class="group" type="text" v-model="form.group">
                 届成员
               </label>
               <textarea slot="info" class="member-info" v-model="form.info" maxlength="170" rows="6"></textarea>
@@ -94,7 +94,7 @@ export default {
         id: this.member.id,
         name: this.member.name,
         major: this.member.major,
-        generation: this.member.generation,
+        group: this.member.group,
         info: this.member.info,
         github: this.member.github,
         blog: this.member.blog,

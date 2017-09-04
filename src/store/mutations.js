@@ -7,14 +7,14 @@ export default {
     };
     state.members = newMembers;
   },
-  SET_MEMBERS_SUCCESS(state, { generation, data }) {
+  SET_MEMBERS_SUCCESS(state, { group, data }) {
     const newMembers = {
       data: data.concat(state.members.data),
       loading: false,
       error: null,
     };
     state.members = newMembers;
-    state.fetchedGenerations.push(generation);
+    state.fetchedGroups.push(group);
   },
   SET_MEMBERS_FAILURE(state, error) {
     const newMembers = {
@@ -28,8 +28,8 @@ export default {
   UPDATE_MEMBER_SUCCESS({ members }, member) {
     members = {
       ...members,
-      [member.generation]: {
-        ...members[member.generation],
+      [member.group]: {
+        ...members[member.group],
         member,
       },
     };
@@ -39,32 +39,32 @@ export default {
   // },
 
   SET_GENERATIONS(state) {
-    state.generations = {
+    state.groups = {
       data: [],
       error: null,
     };
   },
-  SET_GENERATIONS_SUCCESS(state, generations) {
-    state.generations = {
-      data: generations,
+  SET_GENERATIONS_SUCCESS(state, groups) {
+    state.groups = {
+      data: groups,
       error: null,
     };
   },
   SET_GENERATIONS_FAILURE(state, error) {
-    state.generations = {
+    state.groups = {
       data: [],
       error,
     };
   },
 
-  ADD_GENERATION({ generations }, generation) {
-    const newGeneration = {
-      generation,
+  ADD_GENERATION({ groups }, group) {
+    const newGroup = {
+      group,
     };
-    generations.data.push(newGeneration);
+    groups.data.push(newGroup);
   },
-  SET_LOADING(state, { generation }) {
-    state.members[generation].loading = true;
+  SET_LOADING(state, { group }) {
+    state.members[group].loading = true;
   },
 
   POP_ERROR_MSG(state, message) {

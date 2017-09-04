@@ -13,8 +13,8 @@ export default new Vuex.Store({
       loading: false,
       error: null,
     },
-    fetchedGenerations: [],
-    generations: {
+    fetchedGroups: [],
+    groups: {
       data: [],
       error: null,
     },

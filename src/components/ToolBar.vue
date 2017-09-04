@@ -2,7 +2,7 @@
   <div class="toolbar" :style="toolbarStyle">
     <div class="toolbar-headline">
       <h1>
-        第{{ generation || 1 }}届
+        第{{ group || 1 }}届
       </h1>
     </div>
     <div class="toolbar-actions">
@@ -15,18 +15,18 @@
 
 <script>
 export default {
-  props: ['generation'],
+  props: ['group'],
   data() {
     return {
       toolbarStyle: {
-        backgroundPosition: `0 ${this.generation * (-150)}px`,
+        backgroundPosition: `0 ${this.group * (-150)}px`,
       },
     };
   },
   watch: {
     $route() {
       this.toolbarStyle = {
-        backgroundPosition: `0 ${this.generation * (-150)}px`,
+        backgroundPosition: `0 ${this.group * (-150)}px`,
       };
     },
   },

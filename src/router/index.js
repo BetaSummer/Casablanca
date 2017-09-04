@@ -8,7 +8,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/members/:generation',
+      path: '/members/:group',
       name: 'MemberView',
       component: MemberView,
     },

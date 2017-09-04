@@ -2,7 +2,7 @@
   <div class="right">
     <div class="member-identity">
       <slot name="major"></slot>
-      <slot name="generation"></slot>
+      <slot name="group"></slot>
     </div>
     <slot name="info"></slot>
     <div class="social-media">
@@ -37,7 +37,7 @@ export default {
       font-weight 300
       color #2c3e50
       font-size 1.5rem
-    input.generation
+    input.group
       width 1rem
   .member-info
     word-wrap: break-word

@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Member = db.define('member', {
   name: Sequelize.STRING,
-  generation: Sequelize.INTEGER,
+  group: Sequelize.INTEGER,
   major: Sequelize.STRING,
   info: Sequelize.STRING,
   photo: Sequelize.STRING,
