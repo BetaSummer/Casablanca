@@ -1,5 +1,6 @@
 <template>
   <div class="toolbar" :style="toolbarStyle">
+    <pop></pop>
     <div class="toolbar-headline">
       <h1>
         第{{ group || 1 }}届
@@ -14,8 +15,13 @@
 </template>
 
 <script>
+import Pop from './Pop';
+
 export default {
   props: ['group'],
+  components: {
+    Pop,
+  },
   data() {
     return {
       toolbarStyle: {

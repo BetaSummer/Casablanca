@@ -4,7 +4,7 @@
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
           <transition name="fade" mode="out-in">
-            <i class="iconfont icon-edit-copy" @click="isEditing = true" v-if="!isEditing" key="edit"></i>
+            <i class="iconfont icon-edit-copy" @click="toggleEditing" v-if="!isEditing" key="edit"></i>
             <i class="iconfont icon-save" @click="saveForm" v-else key="save"></i>
           </transition>
           <transition name="fade" mode="out-in">
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Left from './Left';
 import Right from './Right';
 
@@ -87,21 +88,20 @@ export default {
     Left,
     Right,
   },
-  data() {
-    return {
-      isEditing: false,
-    };
-  },
   computed: {
     form() {
       return this.member;
     },
+    ...mapState([
+      'isEditing',
+    ]),
   },
   methods: {
+    toggleEditing() {
+      this.$store.dispatch('toggleEditing');
+    },
     saveForm() {
-      // TODO：validity
       this.$store.dispatch('updateMember', this.form);
-      this.isEditing = false;
     },
   },
 };

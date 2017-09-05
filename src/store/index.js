@@ -22,6 +22,7 @@ export default new Vuex.Store({
       content: null,
       type: '',
     },
+    isEditing: false,
   },
   mutations,
   getters,

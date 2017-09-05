@@ -25,14 +25,15 @@ export default {
     state.members = newMembers;
   },
 
-  UPDATE_MEMBER_SUCCESS({ members }, member) {
-    const memberList = members.data;
+  UPDATE_MEMBER_SUCCESS(state, member) {
+    const memberList = state.members.data;
     for (let i = 0; i < memberList.length; i += 1) {
       if (memberList[i].id === member.id) {
         memberList[i] = member;
         break;
       }
     }
+    state.isEditing = false;
   },
   // UPDATE_MEMBER_FAILURE({ members }, e) {
   //
@@ -65,6 +66,10 @@ export default {
   },
   SET_LOADING(state, { group }) {
     state.members[group].loading = true;
+  },
+
+  TOGGLE_EDITING(state) {
+    state.isEditing = true;
   },
 
   POP_ERROR_MSG(state, message) {

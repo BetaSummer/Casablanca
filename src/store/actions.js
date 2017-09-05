@@ -22,6 +22,9 @@ export default {
   addGroup({ commit }, group) {
     commit('ADD_GENERATION', group);
   },
+  toggleEditing({ commit }) {
+    commit('TOGGLE_EDITING');
+  },
   async updateMember({ commit }, memberInfo) {
     const { name, group, major } = memberInfo;
     if (name.length === 0) {
@@ -31,7 +34,7 @@ export default {
     } else if (group.length === 0) {
       commit('POP_ERROR_MSG', '届数不能为空');
     } else if (major.length === 0) {
-      commit('', '专业不能为空');
+      commit('POP_ERROR_MSG', '专业不能为空');
     } else {
       try {
         await api.put('/member', memberInfo);
