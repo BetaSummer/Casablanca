@@ -76,6 +76,14 @@ export default {
     state.message = {
       content: message,
       type: 'error',
+      isShown: true,
     };
+    setTimeout(() => {
+      state.message = {
+        content: message,
+        type: 'error',
+        isShown: false,
+      };
+    }, 3000);
   },
 };

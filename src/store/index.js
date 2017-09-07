@@ -21,6 +21,7 @@ export default new Vuex.Store({
     message: {
       content: null,
       type: '',
+      isShown: false,
     },
     isEditing: false,
   },
