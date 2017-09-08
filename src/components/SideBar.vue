@@ -9,12 +9,12 @@
     <div class="sidebar-content">
       <ul class="term-lists">
         <side-bar-item
-          v-for="(item, index) in generations"
+          v-for="(item, index) in groups"
           :key="index"
           :item="item">
         </side-bar-item>
       </ul>
-      <div class="addlist sidebar-item" @click="addGeneration">
+      <div class="addlist sidebar-item" @click="addGroup">
         <span>
           <i class="iconfont icon-add"></i>
         </span>
@@ -30,15 +30,26 @@
 import SideBarItem from './SideBarItem';
 
 export default {
+<<<<<<< HEAD
+  props: ['groups'],
+=======
   props: ['generations'],
+>>>>>>> develop
   components: {
     SideBarItem,
   },
   methods: {
+<<<<<<< HEAD
+    addGroup() {
+      const newGroup = this.groups.length + 1;
+      this.$store.dispatch('addGroup', newGroup);
+      this.$router.push({ path: `/members/${newGroup}` });
+=======
     addGeneration() {
       const newGeneration = this.generations.length + 1;
       this.$store.dispatch('addGeneration', newGeneration);
       this.$router.push({ path: `/members/${newGeneration}` });
+>>>>>>> develop
     },
   },
 };
@@ -50,7 +61,7 @@ $sidebar-fontsize = 1.1rem
 .sidebar
   display flex
   flex-direction column
-  width 270px
+  min-width 270px
   height 100vh
   .sidebar-header
     display flex

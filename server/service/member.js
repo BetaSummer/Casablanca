@@ -6,19 +6,27 @@ class MemberService {
     const members = await Member.findAll();
     return members;
   }
-  async findByGeneration(generation) {
+  async findByGroup(group) {
     const members = await Member.findAll({
       where: {
-        generation,
+        group,
       },
     });
     return members;
   }
-  async getGenerations() {
-    const generations = await db.query('select distinct generation from members order by generation', {
+  async getGroups() {
+    const groups = await db.query('select distinct `group` from members order by `group`', {
       type: db.QueryTypes.SELECT,
     });
-    return generations;
+    return groups;
+  }
+  async updateMember(memberInfo) {
+    const { id } = memberInfo;
+    Member.update(memberInfo, {
+      where: {
+        id,
+      },
+    });
   }
 }
 

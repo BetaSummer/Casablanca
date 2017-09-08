@@ -1,8 +1,15 @@
 <template>
   <div class="toolbar" :style="toolbarStyle">
+    <transition name="pop">
+      <pop v-show="message.isShown">
+          <span slot="content">
+            {{ message.content }}
+          </span>
+      </pop>
+    </transition>
     <div class="toolbar-headline">
       <h1>
-        第{{ generation || 1 }}届
+        第{{ group || 1 }}届
       </h1>
     </div>
     <div class="toolbar-actions">
@@ -14,19 +21,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import Pop from './Pop';
+
 export default {
-  props: ['generation'],
+  props: ['group'],
+  components: {
+    Pop,
+  },
   data() {
     return {
       toolbarStyle: {
-        backgroundPosition: `0 ${this.generation * (-150)}px`,
+        backgroundPosition: `0 ${this.group * (-150)}px`,
       },
     };
+  },
+  computed: {
+    ...mapState([
+      'message',
+    ]),
   },
   watch: {
     $route() {
       this.toolbarStyle = {
-        backgroundPosition: `0 ${this.generation * (-150)}px`,
+        backgroundPosition: `0 ${this.group * (-150)}px`,
       };
     },
   },
@@ -59,4 +77,12 @@ export default {
       color white
   .toolbar-button:hover
     background #3459c1
+
+.pop-enter-active
+.pop-leave-active 
+  transition: opacity .5s
+
+.pop-enter
+.pop-leave-to
+  opacity: 0
 </style>

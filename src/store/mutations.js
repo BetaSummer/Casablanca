@@ -1,55 +1,89 @@
 export default {
-  SET_MEMBERS(state, { generation }) {
+  SET_MEMBERS(state) {
     const newMembers = {
-      data: [],
+      data: state.members.data,
       loading: true,
       error: null,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
   },
-  SET_MEMBERS_SUCCESS(state, { generation, data }) {
+  SET_MEMBERS_SUCCESS(state, { group, data }) {
     const newMembers = {
-      data,
+      data: data.concat(state.members.data),
       loading: false,
       error: null,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
+    state.fetchedGroups.push(group);
   },
-  SET_MEMBERS_FAILURE(state, { generation, error }) {
+  SET_MEMBERS_FAILURE(state, error) {
     const newMembers = {
-      data: [],
+      data: state.members.data,
       loading: false,
       error,
     };
-    state.members = { ...state.members, [generation]: newMembers };
+    state.members = newMembers;
   },
 
+  UPDATE_MEMBER_SUCCESS(state, member) {
+    const memberList = state.members.data;
+    for (let i = 0; i < memberList.length; i += 1) {
+      if (memberList[i].id === member.id) {
+        memberList[i] = member;
+        break;
+      }
+    }
+    state.isEditing = false;
+  },
+  // UPDATE_MEMBER_FAILURE({ members }, e) {
+  //
+  // },
+
   SET_GENERATIONS(state) {
-    state.generations = {
+    state.groups = {
       data: [],
       error: null,
     };
   },
-  SET_GENERATIONS_SUCCESS(state, generations) {
-    state.generations = {
-      data: generations,
+  SET_GENERATIONS_SUCCESS(state, groups) {
+    state.groups = {
+      data: groups,
       error: null,
     };
   },
   SET_GENERATIONS_FAILURE(state, error) {
-    state.generations = {
+    state.groups = {
       data: [],
       error,
     };
   },
 
-  ADD_GENERATION({ generations }, generation) {
-    const newGeneration = {
-      generation,
+  ADD_GENERATION({ groups }, group) {
+    const newGroup = {
+      group,
     };
-    generations.data.push(newGeneration);
+    groups.data.push(newGroup);
   },
-  SET_LOADING(state, { generation }) {
-    state.members[generation].loading = true;
+  SET_LOADING(state, { group }) {
+    state.members[group].loading = true;
+  },
+
+  TOGGLE_EDITING(state) {
+    state.isEditing = true;
+  },
+
+  POP_MSG(state, { content, type }) {
+    state.message = {
+      content,
+      type,
+      isShown: true,
+    };
+    setTimeout(() => {
+      state.message = {
+        content,
+        type,
+        isShown: false,
+      };
+    }, 2500);
   },
 };

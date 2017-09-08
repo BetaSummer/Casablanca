@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <side-bar :generations="generations.data"></side-bar>
+    <side-bar :groups="groups.data"></side-bar>
     <div class="main">
       <router-view></router-view>
     </div>
@@ -15,7 +15,11 @@ export default {
   name: 'app',
   computed: {
     ...mapState({
+<<<<<<< HEAD
+      groups: 'groups',
+=======
       generations: 'generations',
+>>>>>>> develop
     }),
   },
   components: {
@@ -23,11 +27,19 @@ export default {
   },
   methods: {
     ...mapActions([
+<<<<<<< HEAD
+      'fetchGroupCount',
+    ]),
+  },
+  created() {
+    this.fetchGroupCount();
+=======
       'fetchGenerationCount',
     ]),
   },
   created() {
     this.fetchGenerationCount();
+>>>>>>> develop
   },
 };
 </script>
@@ -40,7 +52,7 @@ body
 
 
 body
-  font-family "Helvetica Neue", Helvetica, STHeiTi, sans-serif
+  font-family 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif
   margin 0
 
 #app

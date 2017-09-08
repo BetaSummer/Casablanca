@@ -1,7 +1,7 @@
 <template>
   <div class="member-list">
     <member-card
-      v-for="member in members.data"
+      v-for="member in members"
       :key="member.id"
       :member="member">
     </member-card>

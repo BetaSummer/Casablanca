@@ -1,19 +1,19 @@
 <template>
   <div class="member-view">
-    <tool-bar :generation="$route.params.generation"></tool-bar>
+    <tool-bar :group="$route.params.group"></tool-bar>
     <member-list
-      :generation="$route.params.generation"
+      :group="$route.params.group"
       :members="members">
     </member-list>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import ToolBar from '../components/ToolBar';
 import MemberList from '../components/MemberList';
 
-let generation;
+let group;
 
 export default {
   name: 'MemberView',
@@ -26,20 +26,20 @@ export default {
   },
   methods: {
     fetchMembers() {
-      generation = this.$route.params.generation;
-      if (!this.allMembers[generation]) {
+      group = this.$route.params.group;
+      if (!this.fetchedGroups.includes(group)) {
         this.$store.dispatch('fetchMembers', {
-          generation,
+          group,
         });
       }
     },
   },
   computed: {
     members() {
-      return this.allMembers[this.$route.params.generation];
+      return this.$store.getters.activeMembers(Number(this.$route.params.group));
     },
-    ...mapGetters([
-      'allMembers',
+    ...mapState([
+      'fetchedGroups',
     ]),
   },
   created() {
