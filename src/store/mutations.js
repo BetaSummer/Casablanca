@@ -72,18 +72,18 @@ export default {
     state.isEditing = true;
   },
 
-  POP_ERROR_MSG(state, message) {
+  POP_MSG(state, { content, type }) {
     state.message = {
-      content: message,
-      type: 'error',
+      content,
+      type,
       isShown: true,
     };
     setTimeout(() => {
       state.message = {
-        content: message,
-        type: 'error',
+        content,
+        type,
         isShown: false,
       };
-    }, 3000);
+    }, 2500);
   },
 };
