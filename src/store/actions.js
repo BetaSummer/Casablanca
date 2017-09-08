@@ -60,4 +60,16 @@ export default {
       }
     }
   },
+  async fetchGenerationCount({ commit }) {
+    commit('SET_GENERATIONS');
+    try {
+      const { data } = await api.get('/generations');
+      commit('SET_GENERATIONS_SUCCESS', data);
+    } catch (e) {
+      commit('SET_GENERATIONS_FAILURE', e);
+    }
+  },
+  addGeneration({ commit }, generation) {
+    commit('ADD_GENERATION', generation);
+  },
 };
