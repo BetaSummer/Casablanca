@@ -30,26 +30,15 @@
 import SideBarItem from './SideBarItem';
 
 export default {
-<<<<<<< HEAD
   props: ['groups'],
-=======
-  props: ['generations'],
->>>>>>> develop
   components: {
     SideBarItem,
   },
   methods: {
-<<<<<<< HEAD
     addGroup() {
       const newGroup = this.groups.length + 1;
       this.$store.dispatch('addGroup', newGroup);
       this.$router.push({ path: `/members/${newGroup}` });
-=======
-    addGeneration() {
-      const newGeneration = this.generations.length + 1;
-      this.$store.dispatch('addGeneration', newGeneration);
-      this.$router.push({ path: `/members/${newGeneration}` });
->>>>>>> develop
     },
   },
 };

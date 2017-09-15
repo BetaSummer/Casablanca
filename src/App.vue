@@ -15,11 +15,7 @@ export default {
   name: 'app',
   computed: {
     ...mapState({
-<<<<<<< HEAD
       groups: 'groups',
-=======
-      generations: 'generations',
->>>>>>> develop
     }),
   },
   components: {
@@ -27,19 +23,11 @@ export default {
   },
   methods: {
     ...mapActions([
-<<<<<<< HEAD
       'fetchGroupCount',
     ]),
   },
   created() {
     this.fetchGroupCount();
-=======
-      'fetchGenerationCount',
-    ]),
-  },
-  created() {
-    this.fetchGenerationCount();
->>>>>>> develop
   },
 };
 </script>
