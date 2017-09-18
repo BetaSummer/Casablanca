@@ -19,6 +19,8 @@ app.use((ctx, next) => {
       ctx.status = 401;
       ctx.body = 'Protected resource, use correct Authorization header to get access';
     }
+  } else if (ctx.url.match(/^\/public/)) {
+    return next();
   } else {
     ctx.status = 401;
     ctx.body = 'Protected resource, use Authorization header to get access';

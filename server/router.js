@@ -5,6 +5,6 @@ const userController = require('./controller/user');
 router.get('/api/members', memberController.index)
       .get('/api/groups', memberController.getGroups)
       .put('/api/member', memberController.updateMember)
-      .post('/api/signin', userController.signIn);
+      .post('/public/signin', userController.signIn);
 
 module.exports = router;
