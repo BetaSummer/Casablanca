@@ -17,6 +17,10 @@ const router = new Router({
       name: 'IndexView',
       component: IndexView,
     },
+    {
+      path: '*',
+      redirect: '/',
+    },
   ],
 });
 

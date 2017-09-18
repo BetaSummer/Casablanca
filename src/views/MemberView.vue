@@ -1,15 +1,18 @@
 <template>
   <div class="member-view">
-    <tool-bar :group="$route.params.group"></tool-bar>
-    <member-list
-      :group="$route.params.group"
-      :members="members">
-    </member-list>
+    <side-bar :groups="groups.data"></side-bar>
+    <div class="main">
+      <tool-bar :group="$route.params.group"></tool-bar>
+      <member-list
+        :members="members">
+      </member-list>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import SideBar from '../components/SideBar';
 import ToolBar from '../components/ToolBar';
 import MemberList from '../components/MemberList';
 
@@ -20,6 +23,7 @@ export default {
   components: {
     ToolBar,
     MemberList,
+    SideBar,
   },
   watch: {
     $route: 'fetchMembers',
@@ -33,22 +37,35 @@ export default {
         });
       }
     },
+    ...mapActions([
+      'fetchGroupCount',
+    ]),
   },
   computed: {
     members() {
       return this.$store.getters.activeMembers(Number(this.$route.params.group));
     },
     ...mapState([
+      'groups',
       'fetchedGroups',
     ]),
   },
   created() {
+    this.fetchGroupCount();
     this.fetchMembers();
   },
 };
 </script>
 
 
-<style scoped>
+<style lang="stylus" scoped>
+.member-view
+  display flex
+  height 100%
 
+.main
+  flex 1
+  display flex
+  flex-direction column
+  background #EEEEEE
 </style>
