@@ -5,7 +5,7 @@ import IndexView from '../views/IndexView';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/members/:group',
@@ -19,3 +19,5 @@ export default new Router({
     },
   ],
 });
+
+export default router;
