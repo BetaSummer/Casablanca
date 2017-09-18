@@ -39,26 +39,26 @@ export default {
   //
   // },
 
-  SET_GENERATIONS(state) {
+  SET_GROUPS(state) {
     state.groups = {
       data: [],
       error: null,
     };
   },
-  SET_GENERATIONS_SUCCESS(state, groups) {
+  SET_GROUPS_SUCCESS(state, groups) {
     state.groups = {
       data: groups,
       error: null,
     };
   },
-  SET_GENERATIONS_FAILURE(state, error) {
+  SET_GROUPS_FAILURE(state, error) {
     state.groups = {
       data: [],
       error,
     };
   },
 
-  ADD_GENERATION({ groups }, group) {
+  ADD_GROUP({ groups }, group) {
     const newGroup = {
       group,
     };

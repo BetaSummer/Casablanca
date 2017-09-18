@@ -4,23 +4,23 @@ export default {
   async fetchMembers({ commit }, { group }) {
     commit('SET_MEMBERS');
     try {
-      const { data } = await api.get(`/members?group=${group}`);
+      const { data } = await api.get(`/api/members?group=${group}`);
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
       commit('SET_MEMBERS_FAILURE', e);
     }
   },
   async fetchGroupCount({ commit }) {
-    commit('SET_GENERATIONS');
+    commit('SET_GROUPS');
     try {
-      const { data } = await api.get('/groups');
-      commit('SET_GENERATIONS_SUCCESS', data);
+      const { data } = await api.get('/api/groups');
+      commit('SET_GROUPS_SUCCESS', data);
     } catch (e) {
-      commit('SET_GENERATIONS_FAILURE', e);
+      commit('SET_GROUPS_FAILURE', e);
     }
   },
   addGroup({ commit }, group) {
-    commit('ADD_GENERATION', group);
+    commit('ADD_GROUP', group);
   },
   toggleEditing({ commit }) {
     commit('TOGGLE_EDITING');
@@ -49,7 +49,7 @@ export default {
       });
     } else {
       try {
-        await api.put('/member', memberInfo);
+        await api.put('/api/member', memberInfo);
         commit('UPDATE_MEMBER_SUCCESS', memberInfo);
         commit('POP_MSG', {
           content: '修改成功',
@@ -59,17 +59,5 @@ export default {
         commit('UPDATE_MEMBER_FAILURE', e);
       }
     }
-  },
-  async fetchGenerationCount({ commit }) {
-    commit('SET_GENERATIONS');
-    try {
-      const { data } = await api.get('/generations');
-      commit('SET_GENERATIONS_SUCCESS', data);
-    } catch (e) {
-      commit('SET_GENERATIONS_FAILURE', e);
-    }
-  },
-  addGeneration({ commit }, generation) {
-    commit('ADD_GENERATION', generation);
   },
 };
