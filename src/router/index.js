@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import MemberView from '../views/MemberView';
-import IndexView from '../views/IndexView';
+import SignInView from '../views/SignInView';
 
 Vue.use(Router);
 
@@ -14,8 +14,8 @@ const router = new Router({
     },
     {
       path: '/',
-      name: 'IndexView',
-      component: IndexView,
+      name: 'SignInView',
+      component: SignInView,
     },
     {
       path: '*',

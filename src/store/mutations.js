@@ -1,4 +1,17 @@
 export default {
+  SIGN_IN(state) {
+    state.pending = true;
+  },
+  SIGN_IN_SUCCESS(state) {
+    state.isSignedIn = true;
+    state.pending = false;
+  },
+  SIGN_IN_FAILURE(state) {
+    state.isSignedIn = false;
+  },
+  LOG_OUT(state) {
+    state.isSignedIn = false;
+  },
   SET_MEMBERS(state) {
     const newMembers = {
       data: state.members.data,

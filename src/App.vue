@@ -3,8 +3,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'app',
+  computed: {
+    ...mapState([
+      'isSignedIn',
+    ]),
+  },
+  created() {
+    if (!this.isSignedIn && this.$route.path !== '/') {
+      this.$router.push('/');
+    }
+  },
 };
 </script>
 
