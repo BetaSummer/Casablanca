@@ -1,6 +1,18 @@
 import api from '../api';
 
 export default {
+  async signIn({ commit }, user) {
+    try {
+      const result = await api.post('/public/signin', user);
+      localStorage.setItem('token', result);
+    } catch (e) {
+      commit('SIGN_IN_FAILURE');
+    }
+  },
+  async logOut({ commit }) {
+    localStorage.removeItem('token');
+    commit('LOG_OUT');
+  },
   async fetchMembers({ commit }, { group }) {
     commit('SET_MEMBERS');
     try {

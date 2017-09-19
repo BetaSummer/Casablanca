@@ -23,6 +23,7 @@ export default new Vuex.Store({
       type: '',
       isShown: false,
     },
+    isSignedIn: !!localStorage.getItem('token'),
     isEditing: false,
   },
   mutations,

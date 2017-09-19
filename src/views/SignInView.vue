@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-
+    SignedInView
   </div>
 </template>
 
