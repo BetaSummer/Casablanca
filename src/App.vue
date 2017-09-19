@@ -24,11 +24,17 @@ export default {
 html
 body
   user-select none
-  overflow: hidden;
+  overflow: hidden
+  height 100%
 
 body
   font-family 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif
   margin 0
+
+h1
+  font-size 2.5rem
+  font-weight 300
+  color #2c3e50
 
 .iconfont
   font-size 1.4rem
