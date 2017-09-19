@@ -1,12 +1,6 @@
 <template>
   <div class="toolbar" :style="toolbarStyle">
-    <transition name="pop">
-      <pop v-show="message.isShown">
-          <span slot="content">
-            {{ message.content }}
-          </span>
-      </pop>
-    </transition>
+    <pop></pop>
     <div class="toolbar-headline">
       <h1>
         第{{ group || 1 }}届
@@ -77,12 +71,4 @@ export default {
       color white
   .toolbar-button:hover
     background #3459c1
-
-.pop-enter-active
-.pop-leave-active 
-  transition: opacity .5s
-
-.pop-enter
-.pop-leave-to
-  opacity: 0
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="pop-wrapper">
-    <div class="pop-container">
-      <slot name="content">
-        This is a piece of message.
-      </slot>
+  <transition name="pop">
+    <div class="pop-wrapper" v-show="message.isShown">
+      <div class="pop-container">
+        {{ message.content }}
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -34,4 +34,13 @@ export default {
   background-color white
   > div
     text-align center
+
+// transition part   
+.pop-enter-active
+.pop-leave-active 
+  transition: opacity .5s
+
+.pop-enter
+.pop-leave-to
+  opacity: 0
 </style>
