@@ -11,12 +11,10 @@ export default new Vuex.Store({
     members: {
       data: [],
       loading: false,
-      error: null,
     },
     fetchedGroups: [],
     groups: {
       data: [],
-      error: null,
     },
     message: {
       content: null,
