@@ -29,7 +29,7 @@ export default {
   left 0
   right 0
   border-radius 1px
-  max-width 10rem
+  max-width 20rem
   padding 0.3rem 0
   background-color white
   > div

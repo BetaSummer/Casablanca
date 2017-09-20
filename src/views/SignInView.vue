@@ -48,7 +48,6 @@ export default {
   },
   watch: {
     isSignedIn() {
-      console.log(this.isSignedIn);
       if (this.isSignedIn) {
         this.$router.push('/members/1');
       }

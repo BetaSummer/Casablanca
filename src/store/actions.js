@@ -1,10 +1,11 @@
 import api from '../api';
+import auth from '../util/auth';
 
 export default {
   async signIn({ commit, dispatch }, user) {
     try {
-      const result = await api.post('/public/signin', user);
-      localStorage.setItem('token', result);
+      const { data } = await api.post('/public/signin', user);
+      localStorage.setItem('token', data);
       commit('SIGN_IN_SUCCESS');
     } catch (e) {
       dispatch('alertMessage', {
@@ -21,7 +22,9 @@ export default {
   async fetchMembers({ commit, dispatch }, { group }) {
     commit('SET_MEMBERS');
     try {
-      const { data } = await api.get(`/api/members?group=${group}`);
+      const { data } = await api.get(`/api/members?group=${group}`, {
+        headers: auth.getAuthHeader(),
+      });
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
       dispatch('alertMessage', {
@@ -34,7 +37,9 @@ export default {
   async fetchGroupCount({ commit, dispatch }) {
     commit('SET_GROUPS');
     try {
-      const { data } = await api.get('/api/groups');
+      const { data } = await api.get('/api/groups', {
+        headers: auth.getAuthHeader(),
+      });
       commit('SET_GROUPS_SUCCESS', data);
     } catch (e) {
       dispatch('alertMessage', {
@@ -74,7 +79,9 @@ export default {
       });
     } else {
       try {
-        await api.put('/api/member', memberInfo);
+        await api.put('/api/member', memberInfo, {
+          headers: auth.getAuthHeader(),
+        });
         dispatch('alertMessage', {
           content: '修改成功',
           type: 'success',
