@@ -1,5 +1,6 @@
 <template>
   <div class="container wrapper">
+    <pop></pop>
     <div class="signin-body wrapper">
       <span id="brand">🌺</span>
       <h1>Casablanca</h1>
@@ -24,8 +25,13 @@
 </template>
 
 <script>
+import Pop from '../components/Pop';
+
 export default {
   name: 'SignInView',
+  components: {
+    Pop,
+  },
 };
 </script>
 
