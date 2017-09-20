@@ -16,6 +16,9 @@ export default {
     if (!this.isSignedIn && this.$route.path !== '/') {
       this.$router.push('/');
     }
+    if (this.isSignedIn && this.$route.path === '/') {
+      this.$router.push('/members/1');
+    }
   },
 };
 </script>

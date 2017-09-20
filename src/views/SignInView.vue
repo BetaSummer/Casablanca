@@ -5,26 +5,27 @@
       <span id="brand">🌺</span>
       <h1>Casablanca</h1>
       <p>β-house 成员管理</p>
-      <form>
+      <form >
         <div class="field">
           <label for="email">
             <i class="iconfont icon-email"></i>
           </label>
-          <input type="email" name="email" placeholder="email">
+          <input type="email" name="email" placeholder="email" v-model="signInForm.email">
         </div>
         <div class="field">
           <label for="password">
             <i class="iconfont icon-password3"></i>
           </label>
-          <input type="password" name="password" placeholder="password">
+          <input type="password" name="password" placeholder="password" v-model="signInForm.password">
         </div>
-        <button>登录</button>
+        <input type="button" value="登录" @click="signIn(signInForm)">
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import Pop from '../components/Pop';
 
 export default {
@@ -32,17 +33,42 @@ export default {
   components: {
     Pop,
   },
+  data() {
+    return {
+      signInForm: {
+        email: '',
+        password: '',
+      },
+    };
+  },
+  computed: {
+    ...mapState([
+      'isSignedIn',
+    ]),
+  },
+  watch: {
+    isSignedIn() {
+      console.log(this.isSignedIn);
+      if (this.isSignedIn) {
+        this.$router.push('/members/1');
+      }
+    },
+  },
+  methods: {
+    ...mapActions([
+      'signIn',
+    ]),
+  },
 };
 </script>
 
 <style lang="stylus" scoped>
 input
-button
   border 1px solid #dae1e3
   border-radius 3px
   font-size 1.1rem
 
-button
+input[type="button"]
   width 100%
   font-size 0.8rem
   padding 5px 0
