@@ -5,11 +5,18 @@
       :key="member.id"
       :member="member">
     </member-card>
+    <member-detail
+      v-if="showModal"
+      :member="activeMember"
+      @close="closeModal">
+    </member-detail>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import MemberCard from './MemberCard';
+import MemberDetail from './MemberDetail';
 
 export default {
   props: [
@@ -17,6 +24,18 @@ export default {
   ],
   components: {
     MemberCard,
+    MemberDetail,
+  },
+  computed: {
+    ...mapState([
+      'showModal',
+      'activeMember',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'closeModal',
+    ]),
   },
 };
 </script>

@@ -96,6 +96,13 @@ export default {
     }
   },
 
+  openModal({ commit }, activeMember) {
+    commit('OPEN_MODAL', activeMember);
+  },
+  closeModal({ commit }) {
+    commit('CLOSE_MODAL');
+  },
+
   alertMessage({ commit, dispatch }, message) {
     dispatch('popupMessage', message);
     setTimeout(() => {

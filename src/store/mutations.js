@@ -76,6 +76,15 @@ export default {
     state.isEditing = true;
   },
 
+  OPEN_MODAL(state, activeMember) {
+    state.activeMember = activeMember;
+    state.showModal = true;
+  },
+  CLOSE_MODAL(state) {
+    state.showModal = false;
+    state.activeMember = {};
+  },
+
   POPUP_MESSAGE(state, { content, type }) {
     state.message = {
       content,

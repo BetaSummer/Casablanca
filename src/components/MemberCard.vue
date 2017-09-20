@@ -1,7 +1,7 @@
 <template>
   <div class="member-card">
     <div class="avatar">
-      <img src="../assets/avatar.png" @click="showModal = true">
+      <img src="../assets/avatar.png" @click="openModal(member)">
     </div>
     <div class="member-info">
       <span class="name">
@@ -19,28 +19,20 @@
         <i class="iconfont icon-blog"></i>
       </a>
     </div>
-    <member-detail
-      v-if="showModal"
-      :member="member"
-      @close="showModal = false">
-    </member-detail>
   </div>
 </template>
 
 <script>
-import MemberDetail from './MemberDetail';
+import { mapActions } from 'vuex';
 
 export default {
   props: [
     'member',
   ],
-  data() {
-    return {
-      showModal: false,
-    };
-  },
-  components: {
-    MemberDetail,
+  methods: {
+    ...mapActions([
+      'openModal',
+    ]),
   },
 };
 </script>
