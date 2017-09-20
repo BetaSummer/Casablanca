@@ -24,6 +24,7 @@ export default new Vuex.Store({
       isShown: false,
     },
     isSignedIn: !!localStorage.getItem('token'),
+    pending: false,
     isEditing: false,
   },
   mutations,

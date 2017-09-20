@@ -5,7 +5,9 @@ export default {
     try {
       const result = await api.post('/public/signin', user);
       localStorage.setItem('token', result);
+      commit('SIGN_IN_SUCCESS');
     } catch (e) {
+      console.log('登陆失败');
       commit('SIGN_IN_FAILURE');
     }
   },
