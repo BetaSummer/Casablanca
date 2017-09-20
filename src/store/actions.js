@@ -1,35 +1,46 @@
 import api from '../api';
 
 export default {
-  async signIn({ commit }, user) {
+  async signIn({ commit, dispatch }, user) {
     try {
       const result = await api.post('/public/signin', user);
       localStorage.setItem('token', result);
       commit('SIGN_IN_SUCCESS');
     } catch (e) {
-      console.log('登陆失败');
-      commit('SIGN_IN_FAILURE');
+      dispatch('alertMessage', {
+        content: '账号或密码错误',
+        type: 'error',
+      });
+      commit('SIGN_IN_FAILURE', e);
     }
   },
-  async logOut({ commit }) {
+  async signOut({ commit }) {
     localStorage.removeItem('token');
     commit('LOG_OUT');
   },
-  async fetchMembers({ commit }, { group }) {
+  async fetchMembers({ commit, dispatch }, { group }) {
     commit('SET_MEMBERS');
     try {
       const { data } = await api.get(`/api/members?group=${group}`);
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
+      dispatch('alertMessage', {
+        content: '获取成员信息失败，请重试',
+        type: 'error',
+      });
       commit('SET_MEMBERS_FAILURE', e);
     }
   },
-  async fetchGroupCount({ commit }) {
+  async fetchGroupCount({ commit, dispatch }) {
     commit('SET_GROUPS');
     try {
       const { data } = await api.get('/api/groups');
       commit('SET_GROUPS_SUCCESS', data);
     } catch (e) {
+      dispatch('alertMessage', {
+        content: '获取届数失败',
+        type: 'error',
+      });
       commit('SET_GROUPS_FAILURE', e);
     }
   },
@@ -39,39 +50,55 @@ export default {
   toggleEditing({ commit }) {
     commit('TOGGLE_EDITING');
   },
-  async updateMember({ commit }, memberInfo) {
+  async updateMember({ commit, dispatch }, memberInfo) {
     const { name, group, major } = memberInfo;
     if (name.length === 0) {
-      commit('POP_MSG', {
+      dispatch('alertMessage', {
         content: '姓名不能为空',
         type: 'error',
       });
     } else if (!Number(group)) {
-      commit('POP_MSG', {
+      dispatch('alertMessage', {
         content: '届数不合法',
         type: 'error',
       });
     } else if (group.length === 0) {
-      commit('POP_MSG', {
+      dispatch('alertMessage', {
         content: '届数不能为空',
         type: 'error',
       });
     } else if (major.length === 0) {
-      commit('POP_MSG', {
+      dispatch('alertMessage', {
         content: '专业不能为空',
         type: 'error',
       });
     } else {
       try {
         await api.put('/api/member', memberInfo);
-        commit('UPDATE_MEMBER_SUCCESS', memberInfo);
-        commit('POP_MSG', {
+        dispatch('alertMessage', {
           content: '修改成功',
           type: 'success',
         });
+        commit('UPDATE_MEMBER_SUCCESS', memberInfo);
       } catch (e) {
-        commit('UPDATE_MEMBER_FAILURE', e);
+        dispatch('alertMessage', {
+          content: '修改失败，请重试',
+          type: 'error',
+        });
       }
     }
+  },
+
+  alertMessage({ commit, dispatch }, message) {
+    dispatch('popupMessage', message);
+    setTimeout(() => {
+      dispatch('hideMessage', message);
+    }, 2500);
+  },
+  popupMessage({ commit }, message) {
+    commit('POPUP_MESSAGE', message);
+  },
+  hideMessage({ commit }, message) {
+    commit('HIDE_MESSAGE', message);
   },
 };
