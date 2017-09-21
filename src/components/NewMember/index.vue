@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     addMember() {
+      this.newMember.group = Number(this.newMember.group);
       this.$store.dispatch('addMember', this.newMember);
     },
   },

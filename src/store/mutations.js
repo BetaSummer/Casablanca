@@ -47,13 +47,12 @@ export default {
   },
 
   ADD_MEMBER_SUCCESS(state, member) {
-    const newMember = [];
-    newMember.push(member);
-    const newMembers = {
-      data: newMember.concat(state.members.data),
+    const memberList = state.members.data.slice();
+    memberList.push(member);
+    state.members = {
+      data: memberList,
       loading: false,
     };
-    state.members = newMembers;
     state.showNewModal = false;
   },
 
