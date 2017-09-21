@@ -12,6 +12,7 @@ export default new Vuex.Store({
       data: [],
       loading: false,
     },
+    activeMember: {},
     fetchedGroups: [],
     groups: {
       data: [],
@@ -21,6 +22,8 @@ export default new Vuex.Store({
       type: '',
       isShown: false,
     },
+    showEditModal: false,
+    showNewModal: false,
     isSignedIn: !!localStorage.getItem('token'),
     pending: false,
     isEditing: false,

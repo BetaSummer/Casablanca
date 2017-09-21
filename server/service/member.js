@@ -28,6 +28,13 @@ class MemberService {
       },
     });
   }
+  async addMember(memberInfo) {
+    try {
+      await Member.build(memberInfo).save();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 module.exports = new MemberService();

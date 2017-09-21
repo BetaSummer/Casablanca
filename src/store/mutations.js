@@ -46,6 +46,16 @@ export default {
     state.isEditing = false;
   },
 
+  ADD_MEMBER_SUCCESS(state, member) {
+    const memberList = state.members.data.slice();
+    memberList.push(member);
+    state.members = {
+      data: memberList,
+      loading: false,
+    };
+    state.showNewModal = false;
+  },
+
   SET_GROUPS(state) {
     state.groups = {
       data: [],
@@ -74,6 +84,21 @@ export default {
 
   TOGGLE_EDITING(state) {
     state.isEditing = true;
+  },
+
+  OPEN_EDIT_MODAL(state, activeMember) {
+    state.activeMember = activeMember;
+    state.showEditModal = true;
+  },
+  CLOSE_EDIT_MODAL(state) {
+    state.showEditModal = false;
+    state.activeMember = {};
+  },
+  OPEN_NEW_MODAL(state) {
+    state.showNewModal = true;
+  },
+  CLOSE_NEW_MODAL(state) {
+    state.showNewModal = false;
   },
 
   POPUP_MESSAGE(state, { content, type }) {
