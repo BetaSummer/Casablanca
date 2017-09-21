@@ -27,6 +27,9 @@ export default {
       });
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
+      if (e.response.status === 401) {
+        localStorage.removeItem('token');
+      }
       dispatch('alertMessage', {
         content: '获取成员信息失败，请重试',
         type: 'error',
