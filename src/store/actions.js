@@ -95,12 +95,59 @@ export default {
       }
     }
   },
-
-  openModal({ commit }, activeMember) {
-    commit('OPEN_MODAL', activeMember);
+  async addMember({ commit, dispatch }, memberInfo) {
+    const { name, group, major } = memberInfo;
+    if (name.length === 0) {
+      dispatch('alertMessage', {
+        content: '姓名不能为空',
+        type: 'error',
+      });
+    } else if (!Number(group)) {
+      dispatch('alertMessage', {
+        content: '届数不合法',
+        type: 'error',
+      });
+    } else if (group.length === 0) {
+      dispatch('alertMessage', {
+        content: '届数不能为空',
+        type: 'error',
+      });
+    } else if (major.length === 0) {
+      dispatch('alertMessage', {
+        content: '专业不能为空',
+        type: 'error',
+      });
+    } else {
+      try {
+        await api.post('/api/member', memberInfo, {
+          headers: auth.getAuthHeader(),
+        });
+        dispatch('alertMessage', {
+          content: '添加成员成功',
+          type: 'success',
+        });
+        commit('ADD_MEMBER_SUCCESS', memberInfo);
+      } catch (e) {
+        dispatch('alertMessage', {
+          content: '添加失败，请重试',
+          type: 'error',
+        });
+      }
+    }
   },
-  closeModal({ commit }) {
-    commit('CLOSE_MODAL');
+
+  openEditModal({ commit }, activeMember) {
+    commit('OPEN_EDIT_MODAL', activeMember);
+  },
+  closeEditModal({ commit }) {
+    commit('CLOSE_EDIT_MODAL');
+  },
+
+  openNewModal({ commit }) {
+    commit('OPEN_NEW_MODAL');
+  },
+  closeNewModal({ commit }) {
+    commit('CLOSE_NEW_MODAL');
   },
 
   alertMessage({ commit, dispatch }, message) {

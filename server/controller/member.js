@@ -17,6 +17,15 @@ class MemberController {
     await memberService.updateMember(member);
     ctx.status = 200;
   }
+  async addMember(ctx) {
+    const member = ctx.request.body;
+    try {
+      await memberService.addMember(member);
+      ctx.status = 201;
+    } catch (e) {
+      ctx.status = 500;
+    }
+  }
 }
 
 module.exports = new MemberController();

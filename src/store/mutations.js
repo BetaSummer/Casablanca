@@ -46,6 +46,17 @@ export default {
     state.isEditing = false;
   },
 
+  ADD_MEMBER_SUCCESS(state, member) {
+    const newMember = [];
+    newMember.push(member);
+    const newMembers = {
+      data: newMember.concat(state.members.data),
+      loading: false,
+    };
+    state.members = newMembers;
+    state.showNewModal = false;
+  },
+
   SET_GROUPS(state) {
     state.groups = {
       data: [],
@@ -76,13 +87,19 @@ export default {
     state.isEditing = true;
   },
 
-  OPEN_MODAL(state, activeMember) {
+  OPEN_EDIT_MODAL(state, activeMember) {
     state.activeMember = activeMember;
-    state.showModal = true;
+    state.showEditModal = true;
   },
-  CLOSE_MODAL(state) {
-    state.showModal = false;
+  CLOSE_EDIT_MODAL(state) {
+    state.showEditModal = false;
     state.activeMember = {};
+  },
+  OPEN_NEW_MODAL(state) {
+    state.showNewModal = true;
+  },
+  CLOSE_NEW_MODAL(state) {
+    state.showNewModal = false;
   },
 
   POPUP_MESSAGE(state, { content, type }) {

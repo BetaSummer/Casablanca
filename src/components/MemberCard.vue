@@ -1,7 +1,7 @@
 <template>
   <div class="member-card">
     <div class="avatar">
-      <img src="../assets/avatar.png" @click="openModal(member)">
+      <img src="../assets/avatar.png" @click="openEditModal(member)">
     </div>
     <div class="member-info">
       <span class="name">
@@ -31,7 +31,7 @@ export default {
   ],
   methods: {
     ...mapActions([
-      'openModal',
+      'openEditModal',
     ]),
   },
 };

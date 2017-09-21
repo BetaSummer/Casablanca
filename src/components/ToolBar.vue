@@ -7,7 +7,7 @@
       </h1>
     </div>
     <div class="toolbar-actions">
-      <button class="toolbar-button">
+      <button class="toolbar-button" @click="openNewModal">
         <i class="iconfont icon-add1"></i>
       </button>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Pop from './Pop';
 
 export default {
@@ -41,6 +41,11 @@ export default {
         backgroundPosition: `0 ${this.group * (-150)}px`,
       };
     },
+  },
+  methods: {
+    ...mapActions([
+      'openNewModal',
+    ]),
   },
 };
 </script>

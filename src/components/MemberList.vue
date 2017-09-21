@@ -6,10 +6,15 @@
       :member="member">
     </member-card>
     <member-detail
-      v-if="showModal"
+      v-if="showEditModal"
       :member="activeMember"
-      @close="closeModal">
+      @close="closeEditModal">
     </member-detail>
+    <new-member
+      v-if="showNewModal"
+      :member="newMember"
+      @close="closeNewModal">
+    </new-member>
   </div>
 </template>
 
@@ -17,6 +22,7 @@
 import { mapState, mapActions } from 'vuex';
 import MemberCard from './MemberCard';
 import MemberDetail from './MemberDetail';
+import NewMember from './NewMember';
 
 export default {
   props: [
@@ -25,16 +31,20 @@ export default {
   components: {
     MemberCard,
     MemberDetail,
+    NewMember,
   },
   computed: {
     ...mapState([
-      'showModal',
+      'showEditModal',
+      'showNewModal',
       'activeMember',
+      'newMember',
     ]),
   },
   methods: {
     ...mapActions([
-      'closeModal',
+      'closeEditModal',
+      'closeNewModal',
     ]),
   },
 };
