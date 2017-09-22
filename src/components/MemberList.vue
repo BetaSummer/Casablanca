@@ -12,7 +12,7 @@
     </member-detail>
     <new-member
       v-if="showNewModal"
-      :member="newMember"
+      :group="$route.params.group"
       @close="closeNewModal">
     </new-member>
   </div>
@@ -38,7 +38,6 @@ export default {
       'showEditModal',
       'showNewModal',
       'activeMember',
-      'newMember',
     ]),
   },
   methods: {

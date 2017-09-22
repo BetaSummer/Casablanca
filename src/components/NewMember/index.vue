@@ -31,7 +31,7 @@
             </label>
             <label slot="group">
               第
-              <input class="group" type="text" v-model="newMember.group">
+              {{ newMember.group }}
               届成员
             </label>
             <textarea slot="info" class="member-info" v-model="newMember.info" maxlength="170" rows="6"></textarea>
@@ -56,14 +56,14 @@ import Right from './Right';
 
 export default {
   props: [
-    'member',
+    'group',
   ],
   data() {
     return {
       newMember: {
         name: '',
         major: '',
-        group: '',
+        group: this.group,
         info: '',
         github: '',
         blog: '',
