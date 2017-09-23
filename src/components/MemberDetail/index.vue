@@ -51,7 +51,7 @@
                 height="512" 
                 accept="image/jpeg,image/png" 
                 size="10"
-                buttonClass="btn"
+                buttonClass="hide"
                 :customStrings="{
                   drag: '点击或拖拽图片至此以上传图片',
                   fileSize: '图片过大'
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import PictureInput from 'vue-picture-input';
 import Left from './Left';
 import Right from './Right';
@@ -115,10 +115,7 @@ export default {
     return {
       form: {
         ...this.member,
-        avatar: {
-          fileName: '',
-          image: '',
-        },
+        avatarBase64: '',
       },
     };
   },
@@ -128,17 +125,17 @@ export default {
     ]),
   },
   methods: {
-    toggleEditing() {
-      this.$store.dispatch('toggleEditing');
-    },
+    ...mapActions([
+      'toggleEditing',
+    ]),
     saveForm() {
+      this.form.group = Number(this.form.group);
       this.$store.dispatch('updateMember', this.form);
     },
     onImgChange() {
-      this.form.avatar = {
-        fileName: this.$refs.pictureInput.fileName,
-        image: this.$refs.pictureInput.image,
-      };
+      const { image, fileName } = this.$refs.pictureInput;
+      this.form.avatarBase64 = image;
+      this.form.photo = `${new Date().getTime()}${fileName}`;
     },
   },
 };
