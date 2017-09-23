@@ -8,7 +8,9 @@ const router = require('./router');
 
 const app = new Koa();
 app.use(cors());
-app.use(bodyparser());
+app.use(bodyparser({
+  jsonLimit: '20mb',
+}));
 
 app.use((ctx, next) => {
   if (ctx.header && ctx.header.authorization) {

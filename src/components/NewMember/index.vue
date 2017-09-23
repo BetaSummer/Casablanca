@@ -22,7 +22,19 @@
             </a>
           </Left>
           <div class="middle">
-            <img src="../../assets/avatar.png" alt="avatar">
+            <picture-input 
+              ref="pictureInput" 
+              @change="onImgChange" 
+              width="512" 
+              height="512" 
+              accept="image/jpeg,image/png" 
+              size="10"
+              buttonClass="btn"
+              :customStrings="{
+                drag: '点击或拖拽图片至此以上传图片',
+                fileSize: '图片过大'
+              }">
+          </picture-input>
           </div>
           <Right>
             <label slot="major">
@@ -51,6 +63,7 @@
 </template>
 
 <script>
+import PictureInput from 'vue-picture-input';
 import Left from './Left';
 import Right from './Right';
 
@@ -63,6 +76,10 @@ export default {
       newMember: {
         name: '',
         major: '',
+        avatar: {
+          fileName: '',
+          image: '',
+        },
         group: this.group,
         info: '',
         github: '',
@@ -73,11 +90,18 @@ export default {
   components: {
     Left,
     Right,
+    PictureInput,
   },
   methods: {
     addMember() {
       this.newMember.group = Number(this.newMember.group);
       this.$store.dispatch('addMember', this.newMember);
+    },
+    onImgChange() {
+      this.newMember.avatar = {
+        fileName: this.$refs.pictureInput.fileName,
+        image: this.$refs.pictureInput.image,
+      };
     },
   },
 };
@@ -115,9 +139,8 @@ export default {
     top 20px
     right 20px
     cursor pointer
-  .middle
-    img
-      width 512px
+  .middle > *
+    width 512px
 
 input
 textarea
