@@ -36,7 +36,28 @@
             </Left>
           </transition>
           <div class="middle">
-            <img src="../../assets/avatar.png" alt="avatar">
+            <transition name="fade" mode="out-in">
+              <img
+                v-if="!isEditing"
+                key="view"
+                :src="require(`@/assets/avatar/${member.photo}`)"
+                alt="avatar">
+              <picture-input 
+                v-else
+                key="editing"
+                ref="pictureInput" 
+                @change="onImgChange" 
+                width="512" 
+                height="512" 
+                accept="image/jpeg,image/png" 
+                size="10"
+                buttonClass="btn"
+                :customStrings="{
+                  drag: '点击或拖拽图片至此以上传图片',
+                  fileSize: '图片过大'
+                }">
+              </picture-input>
+            </transition>
           </div>
           <transition name="fade" mode="out-in">
             <Right v-if="!isEditing" key="view">
@@ -77,6 +98,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import PictureInput from 'vue-picture-input';
 import Left from './Left';
 import Right from './Right';
 
@@ -87,11 +109,20 @@ export default {
   components: {
     Left,
     Right,
+    PictureInput,
+  },
+  data() {
+    return {
+      form: {
+        ...this.member,
+        avatar: {
+          fileName: '',
+          image: '',
+        },
+      },
+    };
   },
   computed: {
-    form() {
-      return this.member;
-    },
     ...mapState([
       'isEditing',
     ]),
@@ -102,6 +133,12 @@ export default {
     },
     saveForm() {
       this.$store.dispatch('updateMember', this.form);
+    },
+    onImgChange() {
+      this.form.avatar = {
+        fileName: this.$refs.pictureInput.fileName,
+        image: this.$refs.pictureInput.image,
+      };
     },
   },
 };
@@ -127,6 +164,7 @@ export default {
   display flex
   position relative
   width 70rem
+  max-height 512px
   margin 0px auto
   background-color #fff
   border-radius 2px
@@ -141,6 +179,9 @@ export default {
     cursor pointer
   .middle
     img
+      height 100%
+      object-fit cover
+    > *
       width 512px
 
 input

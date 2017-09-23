@@ -3,6 +3,7 @@ const db = require('../config/db');
 const fs = require('fs');
 const util = require('util');
 
+// To refactor
 class MemberService {
   async findAll() {
     const members = await Member.findAll();
@@ -23,18 +24,17 @@ class MemberService {
     return groups;
   }
   async updateMember(memberInfo) {
-    const { id } = memberInfo;
-    Member.update(memberInfo, {
-      where: {
-        id,
-      },
-    });
-  }
-  async addMember(memberInfo) {
-    const { avatar, name, group, major, info, github, blog } = memberInfo;
+    const { id, avatar, name, group, major, info, github, blog } = memberInfo;
     const { image, fileName } = avatar;
-    const base64Image = image.split(';base64,').pop();
-    const writeFile = util.promisify(fs.writeFile);
+    if (image.length > 0) {
+      const base64Image = image.split(';base64,').pop();
+      const writeFile = util.promisify(fs.writeFile);
+      try {
+        await writeFile(`./src/assets/avatar/${fileName}`, base64Image, { encoding: 'base64' });
+      } catch (e) {
+        throw e;
+      }
+    }
     const member = {
       name,
       group,
@@ -44,8 +44,27 @@ class MemberService {
       blog,
       photo: fileName,
     };
+    Member.update(member, {
+      where: {
+        id,
+      },
+    });
+  }
+  async addMember(memberInfo) {
+    const { avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
+    const base64Image = avatarBase64.split(';base64,').pop();
+    const writeFile = util.promisify(fs.writeFile);
+    const member = {
+      name,
+      group,
+      major,
+      info,
+      github,
+      blog,
+      photo,
+    };
     try {
-      await writeFile(`./src/assets/avatar/${fileName}`, base64Image, { encoding: 'base64' });
+      await writeFile(`./src/assets/avatar/${photo}`, base64Image, { encoding: 'base64' });
       await Member.build(member).save();
     } catch (e) {
       throw e;
