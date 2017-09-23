@@ -1,5 +1,7 @@
 const Member = require('../model/member');
 const db = require('../config/db');
+const fs = require('fs');
+const util = require('util');
 
 class MemberService {
   async findAll() {
@@ -29,8 +31,22 @@ class MemberService {
     });
   }
   async addMember(memberInfo) {
+    const { avatar, name, group, major, info, github, blog } = memberInfo;
+    const { image, fileName } = avatar;
+    const base64Image = image.split(';base64,').pop();
+    const writeFile = util.promisify(fs.writeFile);
+    const member = {
+      name,
+      group,
+      major,
+      info,
+      github,
+      blog,
+      photo: fileName,
+    };
     try {
-      await Member.build(memberInfo).save();
+      await writeFile(`./src/assets/avatar/${fileName}`, base64Image, { encoding: 'base64' });
+      await Member.build(member).save();
     } catch (e) {
       throw e;
     }
