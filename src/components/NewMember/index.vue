@@ -29,7 +29,7 @@
               height="512" 
               accept="image/jpeg,image/png" 
               size="10"
-              buttonClass="btn"
+              buttonClass="hide"
               :customStrings="{
                 drag: '点击或拖拽图片至此以上传图片',
                 fileSize: '图片过大'
@@ -124,6 +124,7 @@ export default {
   display flex
   position relative
   width 70rem
+  max-height 512px
   margin 0px auto
   background-color #fff
   border-radius 2px
@@ -136,8 +137,12 @@ export default {
     top 20px
     right 20px
     cursor pointer
-  .middle > *
-    width 512px
+  .middle
+    img
+      height 100%
+      object-fit cover
+    > *
+      width 512px
 
 input
 textarea

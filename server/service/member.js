@@ -3,7 +3,9 @@ const db = require('../config/db');
 const fs = require('fs');
 const util = require('util');
 
-// To refactor
+const writeFile = util.promisify(fs.writeFile);
+const unlink = util.promisify(fs.unlink);
+
 class MemberService {
   async findAll() {
     const members = await Member.findAll();
@@ -24,17 +26,7 @@ class MemberService {
     return groups;
   }
   async updateMember(memberInfo) {
-    const { id, avatar, name, group, major, info, github, blog } = memberInfo;
-    const { image, fileName } = avatar;
-    if (image.length > 0) {
-      const base64Image = image.split(';base64,').pop();
-      const writeFile = util.promisify(fs.writeFile);
-      try {
-        await writeFile(`./src/assets/avatar/${fileName}`, base64Image, { encoding: 'base64' });
-      } catch (e) {
-        throw e;
-      }
-    }
+    const { id, avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
     const member = {
       name,
       group,
@@ -42,18 +34,32 @@ class MemberService {
       info,
       github,
       blog,
-      photo: fileName,
+      photo,
     };
-    Member.update(member, {
-      where: {
-        id,
-      },
-    });
+    if (avatarBase64.length > 0) {
+      const base64Image = avatarBase64.split(';base64,').pop();
+      const oldMember = await Member.findById(id);
+      try {
+        // 替换头像
+        await unlink(`./src/assets/avatar/${oldMember.photo}`);
+        await writeFile(`./src/assets/avatar/${photo}`, base64Image, { encoding: 'base64' });
+      } catch (e) {
+        throw e;
+      }
+    }
+    try {
+      await Member.update(member, {
+        where: {
+          id,
+        },
+      });
+    } catch (e) {
+      throw e;
+    }
   }
   async addMember(memberInfo) {
     const { avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
     const base64Image = avatarBase64.split(';base64,').pop();
-    const writeFile = util.promisify(fs.writeFile);
     const member = {
       name,
       group,
