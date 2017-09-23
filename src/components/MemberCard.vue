@@ -1,7 +1,9 @@
 <template>
   <div class="member-card">
     <div class="avatar">
-      <img src="../assets/avatar.png" @click="openEditModal(member)">
+      <img
+        :src="imgSrc"
+        @click="openEditModal(member)">
     </div>
     <div class="member-info">
       <span class="name">
@@ -29,6 +31,11 @@ export default {
   props: [
     'member',
   ],
+  computed: {
+    imgSrc() {
+      return this.member.avatarBase64 ? this.member.avatarBase64 : require(`@/assets/avatar/${this.member.photo}`);
+    },
+  },
   methods: {
     ...mapActions([
       'openEditModal',

@@ -76,10 +76,8 @@ export default {
       newMember: {
         name: '',
         major: '',
-        avatar: {
-          fileName: '',
-          image: '',
-        },
+        avatarBase64: '',
+        photo: '',
         group: this.group,
         info: '',
         github: '',
@@ -98,10 +96,9 @@ export default {
       this.$store.dispatch('addMember', this.newMember);
     },
     onImgChange() {
-      this.newMember.avatar = {
-        fileName: this.$refs.pictureInput.fileName,
-        image: this.$refs.pictureInput.image,
-      };
+      const { image, fileName } = this.$refs.pictureInput;
+      this.newMember.avatarBase64 = image;
+      this.newMember.photo = `${new Date().getTime()}${fileName}`;
     },
   },
 };
