@@ -33,7 +33,7 @@ export default {
   ],
   computed: {
     imgSrc() {
-      return this.member.avatarBase64 ? this.member.avatarBase64 : require(`@/assets/avatar/${this.member.photo}`);
+      return this.member.avatarBase64 ? this.member.avatarBase64 : `/static/avatar/${this.member.photo}`;
     },
   },
   methods: {

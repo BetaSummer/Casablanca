@@ -40,7 +40,7 @@
               <img
                 v-if="!isEditing"
                 key="view"
-                :src="require(`@/assets/avatar/${member.photo}`)"
+                :src="`/static/avatar/${member.photo}`"
                 alt="avatar">
               <picture-input 
                 v-else

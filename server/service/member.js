@@ -41,8 +41,8 @@ class MemberService {
       const oldMember = await Member.findById(id);
       try {
         // 替换头像
-        await unlink(`./src/assets/avatar/${oldMember.photo}`);
-        await writeFile(`./src/assets/avatar/${photo}`, base64Image, { encoding: 'base64' });
+        await unlink(`./static/avatar/${oldMember.photo}`);
+        await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       } catch (e) {
         throw e;
       }
@@ -70,7 +70,7 @@ class MemberService {
       photo,
     };
     try {
-      await writeFile(`./src/assets/avatar/${photo}`, base64Image, { encoding: 'base64' });
+      await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       await Member.build(member).save();
     } catch (e) {
       throw e;
