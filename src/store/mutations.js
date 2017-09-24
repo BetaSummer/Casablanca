@@ -93,6 +93,7 @@ export default {
   CLOSE_EDIT_MODAL(state) {
     state.showEditModal = false;
     state.activeMember = {};
+    state.isEditing = false;
   },
   OPEN_NEW_MODAL(state) {
     state.showNewModal = true;
