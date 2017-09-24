@@ -28,6 +28,7 @@ class MemberService {
   async updateMember(memberInfo) {
     const { id, avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
     const member = {
+      id,
       name,
       group,
       major,
@@ -53,6 +54,7 @@ class MemberService {
           id,
         },
       });
+      return member;
     } catch (e) {
       throw e;
     }
@@ -71,7 +73,7 @@ class MemberService {
     };
     try {
       await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
-      await Member.build(member).save();
+      return await Member.build(member).save();
     } catch (e) {
       throw e;
     }

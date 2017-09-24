@@ -36,13 +36,18 @@ export default {
   },
 
   UPDATE_MEMBER_SUCCESS(state, member) {
-    const memberList = state.members.data;
+    const memberList = state.members.data.slice();
     for (let i = 0; i < memberList.length; i += 1) {
       if (memberList[i].id === member.id) {
         memberList[i] = member;
         break;
       }
     }
+    state.members = {
+      ...state.members,
+      data: memberList,
+    };
+    state.activeMember = member;
     state.isEditing = false;
   },
 
