@@ -82,14 +82,14 @@ export default {
       });
     } else {
       try {
-        await api.put('/api/member', memberInfo, {
+        const { data } = await api.put('/api/member', memberInfo, {
           headers: auth.getAuthHeader(),
         });
         dispatch('alertMessage', {
           content: '修改成功',
           type: 'success',
         });
-        commit('UPDATE_MEMBER_SUCCESS', memberInfo);
+        commit('UPDATE_MEMBER_SUCCESS', data);
       } catch (e) {
         dispatch('alertMessage', {
           content: '修改失败，请重试',
@@ -122,14 +122,14 @@ export default {
       });
     } else {
       try {
-        await api.post('/api/member', memberInfo, {
+        const { data } = await api.post('/api/member', memberInfo, {
           headers: auth.getAuthHeader(),
         });
         dispatch('alertMessage', {
           content: '添加成员成功',
           type: 'success',
         });
-        commit('ADD_MEMBER_SUCCESS', memberInfo);
+        commit('ADD_MEMBER_SUCCESS', data);
       } catch (e) {
         dispatch('alertMessage', {
           content: '添加失败，请重试',

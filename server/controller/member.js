@@ -14,14 +14,16 @@ class MemberController {
   }
   async updateMember(ctx) {
     const member = ctx.request.body;
-    await memberService.updateMember(member);
+    const newMember = await memberService.updateMember(member);
     ctx.status = 200;
+    ctx.body = newMember;
   }
   async addMember(ctx) {
     const member = ctx.request.body;
     try {
-      await memberService.addMember(member);
+      const data = await memberService.addMember(member);
       ctx.status = 201;
+      ctx.body = data;
     } catch (e) {
       ctx.status = 500;
     }
