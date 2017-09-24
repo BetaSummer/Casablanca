@@ -26,22 +26,13 @@ class MemberService {
     return groups;
   }
   async updateMember(memberInfo) {
-    const { id, avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
-    const member = {
-      id,
-      name,
-      group,
-      major,
-      info,
-      github,
-      blog,
-      photo,
-    };
+    const { id, avatarBase64, photo } = memberInfo;
+    // if the avatar is modified, rewrite the avatar file
     if (avatarBase64.length > 0) {
       const base64Image = avatarBase64.split(';base64,').pop();
       const oldMember = await Member.findById(id);
       try {
-        // 替换头像
+        // rewrite the avatar file
         await unlink(`./static/avatar/${oldMember.photo}`);
         await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       } catch (e) {
@@ -49,31 +40,24 @@ class MemberService {
       }
     }
     try {
-      await Member.update(member, {
+      delete memberInfo.avatarBase64;
+      await Member.update(memberInfo, {
         where: {
           id,
         },
       });
-      return member;
+      return memberInfo;
     } catch (e) {
       throw e;
     }
   }
   async addMember(memberInfo) {
-    const { avatarBase64, name, group, major, info, github, blog, photo } = memberInfo;
+    const { avatarBase64, photo } = memberInfo;
     const base64Image = avatarBase64.split(';base64,').pop();
-    const member = {
-      name,
-      group,
-      major,
-      info,
-      github,
-      blog,
-      photo,
-    };
     try {
       await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
-      return await Member.build(member).save();
+      delete memberInfo.avatarBase64;
+      return await Member.build(memberInfo).save();
     } catch (e) {
       throw e;
     }
