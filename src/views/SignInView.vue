@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
 import Pop from '../components/Pop';
 
 export default {
@@ -41,22 +40,10 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState([
-      'isSignedIn',
-    ]),
-  },
-  watch: {
-    isSignedIn() {
-      if (this.isSignedIn) {
-        this.$router.push('/members/1');
-      }
-    },
-  },
   methods: {
-    ...mapActions([
-      'signIn',
-    ]),
+    signIn(user) {
+      this.$store.dispatch('signIn', user).then(() => { this.$router.push('/member/1'); });
+    },
   },
 };
 </script>

@@ -7,12 +7,14 @@ export default {
       const { data } = await api.post('/public/signin', user);
       localStorage.setItem('token', data);
       commit('SIGN_IN_SUCCESS');
+      return data;
     } catch (e) {
       dispatch('alertMessage', {
         content: '账号或密码错误',
         type: 'error',
       });
       commit('SIGN_IN_FAILURE', e);
+      throw e;
     }
   },
   async signOut({ commit }) {
@@ -27,9 +29,6 @@ export default {
       });
       commit('SET_MEMBERS_SUCCESS', { group, data });
     } catch (e) {
-      if (e.response.status === 401) {
-        localStorage.removeItem('token');
-      }
       dispatch('alertMessage', {
         content: '获取成员信息失败，请重试',
         type: 'error',
