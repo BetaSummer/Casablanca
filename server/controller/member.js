@@ -28,6 +28,16 @@ class MemberController {
       ctx.status = 500;
     }
   }
+  async deleteMember(ctx) {
+    const id = ctx.query.id;
+    console.log(id);
+    try {
+      await memberService.deleteMember(id);
+      ctx.status = 204;
+    } catch (e) {
+      ctx.status = 404;
+    }
+  }
 }
 
 module.exports = new MemberController();
