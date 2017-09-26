@@ -3,9 +3,18 @@
     <div class="modal-mask">
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
+          <confirm-box
+            v-if="showConfirm"
+            message="你确定要删除此成员？"
+            @close="showConfirm = false"
+            @confirmed="deleteMember"
+            ></confirm-box>
           <transition name="fade" mode="out-in">
-            <i class="iconfont icon-edit-copy" @click="toggleEditing" v-if="!isEditing" key="edit"></i>
-            <i class="iconfont icon-save" @click="saveForm" v-else key="save"></i>
+            <div class="action-button" v-if="!isEditing" key="edit">
+              <i class="iconfont icon-delete8e" @click="showConfirm = true"></i>
+              <i class="iconfont icon-edit-copy" @click="toggleEditing"></i>
+            </div>
+            <i class="iconfont icon-save action-button" @click="saveForm" v-else key="save"></i>
           </transition>
           <transition name="fade" mode="out-in">
             <Left v-if="!isEditing" key="view">
@@ -99,6 +108,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import PictureInput from 'vue-picture-input';
+import ConfirmBox from './ConfirmBox';
 import Left from './Left';
 import Right from './Right';
 
@@ -110,6 +120,7 @@ export default {
     Left,
     Right,
     PictureInput,
+    ConfirmBox,
   },
   data() {
     return {
@@ -117,6 +128,7 @@ export default {
         ...this.member,
         avatarBase64: '',
       },
+      showConfirm: false,
     };
   },
   computed: {
@@ -128,6 +140,10 @@ export default {
     ...mapActions([
       'toggleEditing',
     ]),
+    deleteMember() {
+      this.showConfirm = false;
+      this.$store.dispatch('deleteMember', this.member.id);
+    },
     saveForm() {
       this.form.group = Number(this.form.group);
       this.$store.dispatch('updateMember', this.form);
@@ -142,21 +158,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.modal-mask
-  position fixed
-  z-index 9998
-  top 0
-  left 0
-  width 100%
-  height 100%
-  background-color rgba(0, 0, 0, .5)
-  display table
-  transition opacity .3s ease
-
-.modal-wrapper
-  display table-cell
-  vertical-align middle
-
 .modal-container
   display flex
   position relative
@@ -169,7 +170,7 @@ export default {
   transition all .3s ease
   > div
     flex 1
-  > i
+  .action-button
     position absolute
     top 20px
     right 20px

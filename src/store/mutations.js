@@ -51,6 +51,21 @@ export default {
     state.isEditing = false;
   },
 
+  DELETE_MEMBER_SUCCESS(state, id) {
+    const memberList = state.members.data.slice();
+    for (let i = 0; i < memberList.length; i += 1) {
+      if (memberList[i].id === id) {
+        memberList.splice(i, 1);
+        break;
+      }
+    }
+    state.members = {
+      ...state.members,
+      data: memberList,
+    };
+    state.showEditModal = false;
+  },
+
   ADD_MEMBER_SUCCESS(state, member) {
     const memberList = state.members.data.slice();
     memberList.push(member);

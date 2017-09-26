@@ -98,6 +98,23 @@ export default {
       }
     }
   },
+  async deleteMember({ commit, dispatch }, id) {
+    try {
+      await api.delete(`/api/member?id=${id}`, {
+        headers: auth.getAuthHeader(),
+      });
+      dispatch('alertMessage', {
+        content: '删除成功',
+        type: 'success',
+      });
+      commit('DELETE_MEMBER_SUCCESS', id);
+    } catch (e) {
+      dispatch('alertMessage', {
+        content: '删除失败￣へ￣',
+        type: 'error',
+      });
+    }
+  },
   async addMember({ commit, dispatch }, memberInfo) {
     const { name, group, major } = memberInfo;
     if (name.length === 0) {

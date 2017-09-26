@@ -62,6 +62,19 @@ class MemberService {
       throw e;
     }
   }
+  async deleteMember(id) {
+    try {
+      const { photo } = await Member.findById(id);
+      await unlink(`./static/avatar/${photo}`);
+      await Member.destroy({
+        where: {
+          id,
+        },
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 module.exports = new MemberService();
