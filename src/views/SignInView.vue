@@ -5,20 +5,20 @@
       <span id="brand">🌺</span>
       <h1>Casablanca</h1>
       <p>β-house 成员管理</p>
-      <form >
+      <form @submit.prevent="signIn(signInForm)">
         <div class="field">
           <label for="email">
             <i class="iconfont icon-email"></i>
           </label>
-          <input type="email" name="email" placeholder="email" v-model="signInForm.email">
+          <input type="email" required name="email" placeholder="email" v-model="signInForm.email">
         </div>
         <div class="field">
           <label for="password">
             <i class="iconfont icon-password3"></i>
           </label>
-          <input type="password" name="password" placeholder="password" v-model="signInForm.password">
+          <input type="password" required name="password" placeholder="password" v-model="signInForm.password">
         </div>
-        <input type="button" value="登录" @click="signIn(signInForm)">
+        <input type="submit" value="登录">
       </form>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     signIn(user) {
-      this.$store.dispatch('signIn', user).then(() => { this.$router.push('/member/1'); });
+      this.$store.dispatch('signIn', user).then(() => { this.$router.push('/members/1'); });
     },
   },
 };
@@ -54,7 +54,7 @@ input
   border-radius 3px
   font-size 1.1rem
 
-input[type="button"]
+input[type="submit"]
   width 100%
   font-size 0.8rem
   padding 5px 0
