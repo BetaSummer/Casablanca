@@ -19,7 +19,7 @@ export default {
   },
   async signOut({ commit }) {
     localStorage.removeItem('token');
-    commit('LOG_OUT');
+    commit('SIGN_OUT');
   },
   async fetchMembers({ commit, dispatch }, { group }) {
     commit('SET_MEMBERS');

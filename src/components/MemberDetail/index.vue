@@ -109,7 +109,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import PictureInput from 'vue-picture-input';
-import ConfirmBox from './ConfirmBox';
+import ConfirmBox from '../ConfirmBox';
 import Left from './Left';
 import Right from './Right';
 
@@ -187,17 +187,6 @@ input
 textarea
   border none
   border-bottom 1px solid black
-
-.modal-enter
-  opacity 0
-
-.modal-leave-active
-  opacity 0
-
-.modal-enter .modal-container,
-.modal-leave-active .modal-container
-  -webkit-transform scale(1.1)
-  transform scale(1.1)
 
 // toggle editing
 .fade-enter-active
