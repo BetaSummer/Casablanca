@@ -1,5 +1,5 @@
 const Member = require('../model/member');
-const db = require('../config/db');
+const db = require('../db');
 const fs = require('fs');
 const util = require('util');
 
