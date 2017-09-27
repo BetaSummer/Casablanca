@@ -8,7 +8,8 @@
             message="你确定要删除此成员？"
             @close="showConfirm = false"
             @confirmed="deleteMember"
-            ></confirm-box>
+            >
+          </confirm-box>
           <transition name="fade" mode="out-in">
             <div class="action-button" v-if="!isEditing" key="edit">
               <i class="iconfont icon-delete8e" @click="showConfirm = true"></i>
@@ -19,10 +20,10 @@
           <transition name="fade" mode="out-in">
             <Left v-if="!isEditing" key="view">
               <h1 slot="name">{{ member.name }}</h1>
-              <a slot="github" :href="member.github" v-show="member.github">
+              <a slot="github" :href="member.github" v-visible="!!member.github">
                 <i class="iconfont icon-pinnedoctocat"></i>
               </a>
-              <a slot="blog" :href="member.blog">
+              <a slot="blog" :href="member.blog" v-visible="!!member.github">
                 <i class="iconfont icon-blog"></i>
               </a>
             </Left>

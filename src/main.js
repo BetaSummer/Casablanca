@@ -7,6 +7,12 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+Vue.directive('visible', {
+  inserted(el, binding) {
+    el.style.visibility = binding.value === true ? 'visible' : 'hidden';
+  },
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

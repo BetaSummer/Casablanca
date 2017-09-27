@@ -14,10 +14,10 @@
       </span>
     </div>
     <div class="social-media">
-      <a :href="member.github" v-show="member.github">
+      <a :href="member.github" v-visible="!!member.github">
         <i class="iconfont icon-pinnedoctocat"></i>
       </a>
-      <a :href="member.blog">
+      <a :href="member.blog" v-visible="!!member.blog">
         <i class="iconfont icon-blog"></i>
       </a>
     </div>
