@@ -3,7 +3,7 @@
     <pop></pop>
     <div class="toolbar-headline">
       <h1>
-        第{{ group || 1 }}届
+        第 {{ group }} 届
       </h1>
     </div>
     <div class="toolbar-actions">
