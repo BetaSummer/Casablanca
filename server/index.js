@@ -2,10 +2,11 @@ const Koa = require('koa');
 const bodyparser = require('koa-bodyparser');
 const cors = require('koa-cors');
 const jwt = require('jsonwebtoken');
-const secret = require('./config/config.dev.js').secret;
 
+const config = require('./config');
 const router = require('./router');
 
+const { secret, port } = config;
 const app = new Koa();
 app.use(cors());
 app.use(bodyparser({
@@ -31,4 +32,4 @@ app.use((ctx, next) => {
 
 app.use(router.routes());
 
-app.listen('3001');
+app.listen(port);

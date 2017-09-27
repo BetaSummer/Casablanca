@@ -3,3 +3,5 @@ exports.mysql = {
 };
 
 exports.secret = 'hellobeta';
+
+exports.port = 3001;
