@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "set NODE_ENV=production && pm2 start server/index.js --name casablanca",
+    "start": "NODE_ENV=production pm2 start server/index.js --name casablanca",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "server": "nodemon server/index.js"
