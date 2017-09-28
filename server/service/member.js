@@ -32,13 +32,13 @@ class MemberService {
       const oldMember = await Member.findById(id);
       try {
         // rewrite the avatar file
-        fs.unlink(`./static/avatar/${oldMember.photo}`, (err) => {
+        fs.unlink(`./dist/static/avatar/${oldMember.photo}`, (err) => {
           // ignore the error if the file doesn't exist
           if (err.code !== 'ENOENT') {
             throw err;
           }
         });
-        await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
+        await writeFile(`./dist/static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       } catch (e) {
         throw e;
       }
@@ -59,7 +59,7 @@ class MemberService {
     const { avatarBase64, photo } = memberInfo;
     const base64Image = avatarBase64.split(';base64,').pop();
     try {
-      await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
+      await writeFile(`./dist/static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       delete memberInfo.avatarBase64;
       return await Member.build(memberInfo).save();
     } catch (e) {
@@ -69,7 +69,7 @@ class MemberService {
   async deleteMember(id) {
     try {
       const { photo } = await Member.findById(id);
-      fs.unlink(`./static/avatar/${photo}`, (err) => {
+      fs.unlink(`./dist/static/avatar/${photo}`, (err) => {
         // ignore the error if the file doesn't exist
         if (err.code !== 'ENOENT') {
           throw err;
