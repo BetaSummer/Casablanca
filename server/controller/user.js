@@ -1,6 +1,6 @@
 const userService = require('../service/user');
 const jwt = require('jsonwebtoken');
-const secret = require('../config/config.dev').secret;
+const secret = require('../config').secret;
 
 class UserController {
   async signIn(ctx) {
