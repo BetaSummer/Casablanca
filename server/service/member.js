@@ -4,7 +4,6 @@ const fs = require('fs');
 const util = require('util');
 
 const writeFile = util.promisify(fs.writeFile);
-const unlink = util.promisify(fs.unlink);
 
 class MemberService {
   async findAll() {
@@ -33,7 +32,12 @@ class MemberService {
       const oldMember = await Member.findById(id);
       try {
         // rewrite the avatar file
-        await unlink(`./static/avatar/${oldMember.photo}`);
+        fs.unlink(`./static/avatar/${oldMember.photo}`, (err) => {
+          // ignore the error if the file doesn't exist
+          if (err.code !== 'ENOENT') {
+            throw err;
+          }
+        });
         await writeFile(`./static/avatar/${photo}`, base64Image, { encoding: 'base64' });
       } catch (e) {
         throw e;
@@ -65,7 +69,12 @@ class MemberService {
   async deleteMember(id) {
     try {
       const { photo } = await Member.findById(id);
-      await unlink(`./static/avatar/${photo}`);
+      fs.unlink(`./static/avatar/${photo}`, (err) => {
+        // ignore the error if the file doesn't exist
+        if (err.code !== 'ENOENT') {
+          throw err;
+        }
+      });
       await Member.destroy({
         where: {
           id,
