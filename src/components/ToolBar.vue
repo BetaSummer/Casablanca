@@ -1,12 +1,13 @@
 <template>
-  <div class="toolbar" :style="bgPosition">
+  <div class="toolbar" :style="toolbarStyle">
+    <pop></pop>
     <div class="toolbar-headline">
       <h1>
-        第{{ generation }}届
+        第 {{ group }} 届
       </h1>
     </div>
     <div class="toolbar-actions">
-      <button class="toolbar-button">
+      <button class="toolbar-button" @click="openNewModal">
         <i class="iconfont icon-add1"></i>
       </button>
     </div>
@@ -14,15 +15,38 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import Pop from './Pop';
+
 export default {
+  props: ['group'],
+  components: {
+    Pop,
+  },
   data() {
     return {
-      bgPosition: {
-        backgroundPosition: `0 ${this.generation * (-150)}px`,
+      toolbarStyle: {
+        backgroundPosition: `0 ${this.group * (-150)}px`,
       },
     };
   },
-  props: ['generation'],
+  computed: {
+    ...mapState([
+      'message',
+    ]),
+  },
+  watch: {
+    $route() {
+      this.toolbarStyle = {
+        backgroundPosition: `0 ${this.group * (-150)}px`,
+      };
+    },
+  },
+  methods: {
+    ...mapActions([
+      'openNewModal',
+    ]),
+  },
 };
 </script>
 
@@ -35,7 +59,6 @@ export default {
   align-items flex-end
   border-left 1px solid rgba(0,0,0,.1)
   background url('../assets/toolbar-bg.jpg') no-repeat
-  // 根据不同届更改 position
   background-position 0 0
   .toolbar-headline
     align-self flex-end

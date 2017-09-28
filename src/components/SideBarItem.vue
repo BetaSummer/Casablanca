@@ -1,15 +1,15 @@
 <template>
-  <router-link :to="`/members/${term}`">
+  <router-link :to="`/members/${item.group}`" exact>
     <li class="sidebar-item">
       <i class="iconfont icon-people"></i>
-      <span class="term">第 {{ term }} 届</span>
+      <span class="term">第 {{ item.group }} 届</span>
     </li>
   </router-link>
 </template>
 
 <script>
 export default {
-  props: ['term'],
+  props: ['item'],
 };
 </script>
 
@@ -27,12 +27,13 @@ export default {
 
 .sidebar-item:hover
   background #f5f5f5
-  
-.sidebar-item.active
-  background #ededed
 
 a
   outline none
   text-decoration none
   color black
+
+a.router-link-active
+  .sidebar-item
+    background #ededed
 </style>

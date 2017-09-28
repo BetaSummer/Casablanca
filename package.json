@@ -1,18 +1,30 @@
 {
   "name": "casablanca",
   "version": "1.0.0",
-  "description": "Please come back to me in Casablanca.",
+  "description": "β-house members management.",
   "author": "clarksd <clarksd@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
+    "start": "set NODE_ENV=production && pm2 start server/index.js --name casablanca",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "server": "nodemon server/index.js"
   },
   "dependencies": {
+    "axios": "^0.16.2",
+    "jsonwebtoken": "^8.0.1",
+    "jwt-decode": "^2.2.0",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.2.1",
+    "mysql2": "^1.3.6",
+    "sequelize": "^4.4.2",
     "vue": "^2.3.3",
-    "vue-router": "^2.3.1"
+    "vue-picture-input": "^1.16.0",
+    "vue-router": "^2.3.1",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

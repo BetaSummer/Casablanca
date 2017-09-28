@@ -1,15 +1,50 @@
 <template>
   <div class="member-list">
-    <member-card v-for="item in [1,2,3,4,5,6,7,8,9,10]" :key="item"></member-card>
+    <member-card
+      v-for="member in members"
+      :key="member.id"
+      :member="member">
+    </member-card>
+    <member-detail
+      v-if="showEditModal"
+      :member="activeMember"
+      @close="closeEditModal">
+    </member-detail>
+    <new-member
+      v-if="showNewModal"
+      :group="$route.params.group"
+      @close="closeNewModal">
+    </new-member>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import MemberCard from './MemberCard';
+import MemberDetail from './MemberDetail';
+import NewMember from './NewMember';
 
 export default {
+  props: [
+    'members',
+  ],
   components: {
     MemberCard,
+    MemberDetail,
+    NewMember,
+  },
+  computed: {
+    ...mapState([
+      'showEditModal',
+      'showNewModal',
+      'activeMember',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'closeEditModal',
+      'closeNewModal',
+    ]),
   },
 };
 </script>

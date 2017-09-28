@@ -1,16 +1,27 @@
 <template>
   <div class="sidebar">
+    <confirm-box
+      v-if="showConfirm"
+      message="确定要登出吗"
+      @close="showConfirm = false"
+      @confirmed="signOut">
+    </confirm-box>
     <header class="sidebar-header">
-        <span>
+        <div class="greeting">
           <i class="iconfont icon-heart" aria-hidden="true"></i>
-        </span>
-        <span>Hello, betahouse!</span>
+          <span>Hello, betahouse!</span>
+        </div>
+        <i class="iconfont icon-signout" @click="showConfirm = true"></i>
     </header>
     <div class="sidebar-content">
       <ul class="term-lists">
-        <side-bar-item v-for="(term, index) in terms" :key="index" :term="term"></side-bar-item>
+        <side-bar-item
+          v-for="(item, index) in groups"
+          :key="index"
+          :item="item">
+        </side-bar-item>
       </ul>
-      <div class="addlist sidebar-item">
+      <div class="addlist sidebar-item" @click="addGroup">
         <span>
           <i class="iconfont icon-add"></i>
         </span>
@@ -24,11 +35,29 @@
 
 <script>
 import SideBarItem from './SideBarItem';
+import ConfirmBox from './ConfirmBox';
 
 export default {
-  props: ['terms'],
+  props: ['groups'],
   components: {
     SideBarItem,
+    ConfirmBox,
+  },
+  data() {
+    return {
+      showConfirm: false,
+    };
+  },
+  methods: {
+    addGroup() {
+      const newGroup = this.groups.length + 1;
+      this.$store.dispatch('addGroup', newGroup);
+      this.$router.push({ path: `/members/${newGroup}` });
+    },
+    signOut() {
+      this.showConfirm = false;
+      this.$store.dispatch('signOut').then(() => this.$router.push('/'));
+    },
   },
 };
 </script>
@@ -39,17 +68,20 @@ $sidebar-fontsize = 1.1rem
 .sidebar
   display flex
   flex-direction column
-  width 270px
+  min-width 270px
   height 100vh
   .sidebar-header
     display flex
     align-items center
     font-size $sidebar-fontsize
-    flex-shrink 0
+    justify-content space-between
     box-sizing border-box
     height 40px
     box-shadow: 0 1px 0 rgba(0,0,0,.1);
-    padding 4px
+    padding 6px
+    i.icon-signout
+      cursor pointer
+    
   .sidebar-content
     flex 1
     padding 6px 0
