@@ -37,10 +37,10 @@
                   :size="form.name.length || 1"
                   :maxlength="4">  
               </label>
-              <a slot="github" :href="member.github" v-show="member.github">
+              <a slot="github" :href="member.github" v-visible="!!member.github">
                 <i class="iconfont icon-pinnedoctocat"></i>
               </a>
-              <a slot="blog" :href="member.blog">
+              <a slot="blog" :href="member.github" v-visible="!!member.github">
                 <i class="iconfont icon-blog"></i>
               </a>
             </Left>
@@ -163,7 +163,7 @@ export default {
   display flex
   position relative
   width 70rem
-  max-height 512px
+  height 512px
   margin 0px auto
   background-color #fff
   border-radius 2px

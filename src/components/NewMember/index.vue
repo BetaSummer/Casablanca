@@ -124,7 +124,7 @@ export default {
   display flex
   position relative
   width 70rem
-  max-height 512px
+  height 512px
   margin 0px auto
   background-color #fff
   border-radius 2px
